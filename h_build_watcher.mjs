@@ -12,7 +12,7 @@ export class h_build_watcher {
 	}
 	run = () => {
 		console.info(`starts watching: "${this.builder.base_path}"`);
-		const watcher = chokidar.watch(this.builder.watch_path, {
+		const watcher = chokidar.watch([this.builder.watch_path, this.builder.classes_path], {
 			ignored: /[\/\\]\./,
 			persistent: true,
 		});
@@ -21,15 +21,8 @@ export class h_build_watcher {
 				await this.handle_path(path);
 			})
 			.on('change', async (path) => {
-				await this.handle_path(path);
+				await this.handle_path(path, true);
 			});
-		const engine = chokidar.watch(this.builder.classes_path, {
-			ignored: /[\/\\]\./,
-			persistent: true,
-		});
-		engine.on('change', async () => {
-			await this.builder.handle_html_all();
-		});
 	};
 	/**
 	 * @private
@@ -47,16 +40,24 @@ export class h_build_watcher {
 	/**
 	 * @private
 	 * @param {string} path
+	 * @param {boolean} is_change
 	 */
-	handle_path = async (path) => {
-		if (!path.includes('.html')) {
+	handle_path = async (path, is_change = false) => {
+		if (!path.includes(this.builder.watch_path)) {
+			if (is_change) {
+				await this.builder.handle_html_all();
+				console.info(`render build for all "${this.builder.watch_path}/*.html"`);
+				return;
+			}
+		} else if (!path.includes('.html')) {
 			this.copy_file(
 				path,
 				path.replace(this.builder.watch_path, this.builder.main_static_path)
 			);
 			return;
+		} else {
+			await this.builder.handle_html(path);
+			console.info(`render build for "${path}"`);
 		}
-		await this.builder.handle_html(path);
-		console.info(`render build for "${path}"`);
 	};
 }

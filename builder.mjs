@@ -136,7 +136,9 @@ class builder {
 				await this.handle_html_all(file_path);
 				continue;
 			}
-			await this.handle_html(file_path);
+			if (file_path.includes('.html')) {
+				await this.handle_html(file_path);
+			}
 		}
 		return;
 	};
