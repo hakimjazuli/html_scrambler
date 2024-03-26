@@ -1,24 +1,28 @@
 {
-  "name": "html_scrambler",
-  "version": "1.0.0",
-  "description": "scramble web standard html static file into any web html framework",
-  "main": "builder.mjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hakimjazuli/html_scrambler.git"
-  },
-  "keywords": [
-    "reverse",
-    "html",
-    "generator"
-  ],
-  "author": "hakim_jazuli",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hakimjazuli/html_scrambler/issues"
-  },
-  "homepage": "https://github.com/hakimjazuli/html_scrambler#readme"
+	"name": "html_scrambler",
+	"version": "1.0.0",
+	"description": "scramble web standard html static file into any web html framework",
+	"main": "builder.mjs",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hakimjazuli/html_scrambler.git"
+	},
+	"keywords": [
+		"reverse",
+		"html",
+		"generator"
+	],
+	"author": "hakim_jazuli",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/hakimjazuli/html_scrambler/issues"
+	},
+	"dependencies": {
+		"chokidar": "^3.6.0",
+		"jsdom": "^22.1.0"
+	},
+	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme"
 }
