@@ -1,4 +1,6 @@
 /.git
 /node_modules
+/classes_example
 
 package-lock.json
+main.example.mjs
