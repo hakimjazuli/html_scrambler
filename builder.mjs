@@ -66,8 +66,12 @@ export class builder {
 	/**
 	 * @typedef build_options
 	 * @property {string} main_static_path
+	 * your server static path
 	 * @property {string} classes_path
+	 * path for your classes to be invoked
 	 * @property {string} watch_path
+	 * - watch path for changes
+	 * - your static site Generator's build path
 	 * @property {string} build_path
 	 * save all generated html to folder, no need for trailing slashes
 	 * @property {re_name} re_name
@@ -119,8 +123,17 @@ export class builder {
 		this.watch_path = watch_path;
 		this.b_build = new b_build(this);
 		this.base_path = this.b_build.input_helpers.get_bases();
-		this.split = this.b_build.input_helpers.split_esc;
 	}
+	/**
+	 * Description
+	 * @param {string} string
+	 * @param {string} delimiter
+	 */
+	split_esc = (string, delimiter) => {
+		return string
+			.split(new RegExp(`(?<!\\\\)${delimiter}`))
+			.map((part) => part.replace(/\\/, ''));
+	};
 	/**
 	 * Description
 	 * @param {string} watch_path
@@ -183,7 +196,7 @@ export class builder {
 			if (!commands) {
 				continue;
 			}
-			const [class_, method_, ...args] = this.split(
+			const [class_, method_, ...args] = this.split_esc(
 				commands,
 				this.b_build.attribute_delimiter
 			);
@@ -278,6 +291,13 @@ export class builder {
 			}
 		});
 	};
+	class_attribute_resolver = () => {
+		let class_;
+		while ((class_ = this.element.querySelector('[class]'))) {
+			class_.setAttribute('className', class_.getAttribute('class') ?? '');
+			class_.removeAttribute('class');
+		}
+	};
 	/**
 	 * Description
 	 * @param {string} file_path
@@ -293,7 +313,31 @@ export class builder {
 		const only_inner = await callback();
 		file_path = `${this.base_path}\\${this.new_relative}\\${file_path}`;
 		const dir_path = path.dirname(file_path);
-		const content = only_inner ? this.element.innerHTML : this.element.outerHTML;
+		let content = '';
+		if (only_inner) {
+			switch (true) {
+				case file_path.endsWith('.jsx'):
+				case file_path.endsWith('.tsx'):
+					this.class_attribute_resolver();
+					break;
+			}
+			content = this.element.innerHTML;
+		} else {
+			switch (true) {
+				case file_path.endsWith('.jsx'):
+				case file_path.endsWith('.tsx'):
+					if (this.element.hasAttribute('class')) {
+						this.element.setAttribute(
+							'className',
+							this.element.getAttribute('class') ?? ''
+						);
+						this.element.removeAttribute('class');
+						this.class_attribute_resolver();
+					}
+					break;
+			}
+			content = this.element.outerHTML;
+		}
 		this.handle_save(file_path, dir_path, content);
 	};
 	watch = () => {

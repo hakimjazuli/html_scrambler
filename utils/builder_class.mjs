@@ -1,6 +1,16 @@
 // @ts-check
 import { builder } from '../builder.mjs';
-
+/**
+ * HOW TO CALL from html
+ * use attribute:
+ * - build, with conjunction of
+ * - b-index_number="class_name;method_name;...arguments";
+ * -- use this.builder.split, to split arguments using this.builder.b_build.attribute_delimiter variant as argument
+ *
+ * reference on active document
+ * - this.builder.document is curent document;
+ * - this.builder.element is curent element;
+ */
 export class builder_class {
 	/**
 	 * Description

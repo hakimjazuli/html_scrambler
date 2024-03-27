@@ -138,14 +138,4 @@ export class input_helpers {
 		}
 		return string;
 	};
-	/**
-	 * Description
-	 * @param {string} string
-	 * @param {string} delimiter
-	 */
-	split_esc = (string, delimiter) => {
-		return string
-			.split(new RegExp(`(?<!\\\\)${delimiter}`))
-			.map((part) => part.replace(/\\/, ''));
-	};
 }
