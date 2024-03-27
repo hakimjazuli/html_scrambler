@@ -43,7 +43,7 @@ export class h_build_watcher {
 	 * @param {boolean} is_change
 	 */
 	handle_path = async (path, is_change = false) => {
-		if (!path.includes(this.builder.watch_path)) {
+		if (!path.startsWith(this.builder.watch_path)) {
 			if (is_change) {
 				await this.builder.handle_html_all();
 				console.info(`render build for all "${this.builder.watch_path}/*.html"`);
