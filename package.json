@@ -2,7 +2,7 @@
 	"name": "html_scrambler",
 	"version": "1.0.0",
 	"description": "scramble web standard html static folder into any web html framework",
-	"main": "builder.mjs",
+	"main": "index.mjs",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

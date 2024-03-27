@@ -4,13 +4,12 @@ import fs, { mkdir } from 'fs';
 import path from 'path';
 import { b_build } from './utils/b_build.mjs';
 import { h_build_watcher } from './h_build_watcher.mjs';
-import { builder_class } from './utils/builder_class.mjs';
 
 /**
  * @typedef {null|Object.<string,([open_tag:string,close_tag:string])>} rename_rules
  */
 
-class builder {
+export class builder {
 	/** @type {Document} document */
 	document;
 	/**
@@ -302,4 +301,3 @@ class builder {
 		watcher.run();
 	};
 }
-export { builder, builder_class };
