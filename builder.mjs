@@ -291,6 +291,9 @@ export class builder {
 			}
 		});
 	};
+	/**
+	 * @private
+	 */
 	class_attribute_resolver = () => {
 		let class_;
 		while ((class_ = this.element.querySelector('[class]'))) {
