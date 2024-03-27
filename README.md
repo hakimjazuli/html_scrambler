@@ -54,7 +54,7 @@ node main.mjs
 
 to call your class;method add attribute on the element to proccess
 
--   **builder** and
+-   **build** and
 -   **b**[dash]**index**="_class_name_[attribute_delimiter]_method_name_[attribute_delimiter]_...arguments_"
 
 which then be called each index incrementally (starts from 1) and will end if there are no more
@@ -94,7 +94,7 @@ into multiple file
 you can call it using partial method
 
 ```html
-<div id="test" builder b-1="bss;partial;component/test.blade.php;@include('view.name')">test</div>
+<div id="test" build b-1="bss;partial;component/test.blade.php;@include('view.name')">test</div>
 ```
 
 which will turn main html line into

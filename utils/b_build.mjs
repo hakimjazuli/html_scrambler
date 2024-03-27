@@ -32,9 +32,6 @@ export class b_build {
 		this.builder = h_builder;
 		this.input_helpers = new input_helpers(this);
 	}
-	path = {
-		classes: '/app_modules/builder',
-	};
 	/**
 	 * Description
 	 * @param {string} extention
