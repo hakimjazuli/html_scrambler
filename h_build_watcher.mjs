@@ -30,7 +30,7 @@ export class h_build_watcher {
 			console.log('Received SIGINT. Exiting...');
 			process.exit(0);
 		});
-		console.info(`starts watching: "${this.builder.base_path}"\n`, 'Press Ctrl+C to exit.');
+		console.info(`\nstarts watching: "${this.builder.base_path}"\n`, 'Press Ctrl+C to exit.');
 	};
 	/**
 	 * @private
