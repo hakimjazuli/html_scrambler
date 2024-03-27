@@ -11,9 +11,7 @@
 		"url": "git+https://github.com/hakimjazuli/html_scrambler.git"
 	},
 	"keywords": [
-		"reverse",
-		"html",
-		"generator"
+		"reverse html generator"
 	],
 	"author": "hakim_jazuli",
 	"license": "MIT",
