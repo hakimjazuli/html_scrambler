@@ -1,5 +1,5 @@
 // @ts-check
-import { JSDOM } from 'jsdom';
+import domino from 'domino';
 import fs, { mkdir } from 'fs';
 import path from 'path';
 import { b_build } from './b_build.mjs';
@@ -136,8 +136,7 @@ export class h_builder {
 	 */
 	handle_html = async (html_path) => {
 		const content = fs.readFileSync(html_path, 'utf-8');
-		const dom = new JSDOM(content, { contentType: 'text/html' });
-		this.document = dom.window.document;
+		this.document = domino.createDocument(content, true);
 		const selector = this.b_build.build_identifier;
 		const build_elements = this.document.querySelectorAll(`[${selector}]`);
 		for (let i = build_elements.length - 1; i >= 0; i--) {
