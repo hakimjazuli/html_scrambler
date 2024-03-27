@@ -135,8 +135,8 @@ export class h_builder {
 	 * @returns {Promise<void>}
 	 */
 	handle_html = async (html_path) => {
-		const content = fs.readFileSync(html_path, 'utf8');
-		const dom = new JSDOM(content);
+		const content = fs.readFileSync(html_path, 'utf-8');
+		const dom = new JSDOM(content, { contentType: 'text/html' });
 		this.document = dom.window.document;
 		const selector = this.b_build.build_identifier;
 		const build_elements = this.document.querySelectorAll(`[${selector}]`);
