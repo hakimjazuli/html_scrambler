@@ -29,10 +29,6 @@ export class bss extends builder_class {
 	};
 	/**
 	 * Description
-	 * @param {string[]} srcs
-	 */
-	/**
-	 * Description
 	 * @param {string} tag
 	 * @param {string} attribute_identifier
 	 * @param {string[]} likes
