@@ -1,5 +1,5 @@
 // @ts-check
-import { builder } from '../builder.mjs';
+import { h_builder } from './h_builder.mjs';
 import { input_helpers } from './input_helpers.mjs';
 
 export class b_build {
@@ -22,14 +22,14 @@ export class b_build {
 	input_helpers;
 	/**
 	 * Description
-	 * @param {builder} builder
+	 * @param {h_builder} h_builder
 	 */
-	constructor(builder) {
-		if (builder.delimiters !== null) {
+	constructor(h_builder) {
+		if (h_builder.delimiters !== null) {
 			[this.attribute_delimiter_2, this.attribute_delimiter_3 = this.attribute_delimiter_3] =
-				builder.delimiters;
+				h_builder.delimiters;
 		}
-		this.builder = builder;
+		this.builder = h_builder;
 		this.input_helpers = new input_helpers(this);
 	}
 	path = {
@@ -38,7 +38,7 @@ export class b_build {
 	/**
 	 * Description
 	 * @param {string} extention
-	 * @param {import('../builder.mjs').rename_rules} [opening_closing_tag_rules]
+	 * @param {import('./h_builder.mjs').opening_closing_tag_rules} [opening_closing_tag_rules]
 	 */
 	export_identifier = (extention, opening_closing_tag_rules = null) => {
 		if (opening_closing_tag_rules !== null) {

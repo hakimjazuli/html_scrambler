@@ -1,5 +1,6 @@
 // @ts-check
-import { builder } from '../builder.mjs';
+import { h_builder } from './h_builder.mjs';
+
 /**
  * HOW TO CALL from html
  * use attribute:
@@ -14,10 +15,10 @@ import { builder } from '../builder.mjs';
 export class builder_class {
 	/**
 	 * Description
-	 * @param {builder} builder
+	 * @param {h_builder} h_builder
 	 */
-	constructor(builder) {
-		this.builder = builder;
+	constructor(h_builder) {
+		this.h_builder = h_builder;
 	}
 	/**
 	 * Description
@@ -26,11 +27,11 @@ export class builder_class {
 	 */
 	replace_with = (element_string, only_inner = false) => {
 		if (only_inner) {
-			this.builder.element.innerHTML = element_string;
+			this.h_builder.element.innerHTML = element_string;
 			return;
 		}
 		this.start_with(element_string, only_inner);
-		this.builder.element.remove();
+		this.h_builder.element.remove();
 	};
 	/**
 	 * Description
@@ -41,21 +42,21 @@ export class builder_class {
 	 * - true;
 	 */
 	surround_with = (argument_open, argument_close, use_inner = false) => {
-		const text_before = this.builder.document.createTextNode(argument_open);
-		const text_after = this.builder.document.createTextNode(argument_close);
+		const text_before = this.h_builder.document.createTextNode(argument_open);
+		const text_after = this.h_builder.document.createTextNode(argument_close);
 		if (use_inner) {
-			const parent_node = this.builder.element;
-			const elem = this.builder.element.childNodes[0];
+			const parent_node = this.h_builder.element;
+			const elem = this.h_builder.element.childNodes[0];
 			parent_node.insertBefore(text_before, elem);
 			parent_node.insertBefore(text_after, elem.nextSibling);
 			return;
 		}
-		const parent_node = this.builder.element.parentNode;
+		const parent_node = this.h_builder.element.parentNode;
 		if (!parent_node) {
 			return;
 		}
-		parent_node.insertBefore(text_before, this.builder.element);
-		parent_node.insertBefore(text_after, this.builder.element.nextSibling);
+		parent_node.insertBefore(text_before, this.h_builder.element);
+		parent_node.insertBefore(text_after, this.h_builder.element.nextSibling);
 	};
 	/**
 	 * Description
@@ -65,18 +66,18 @@ export class builder_class {
 	 * - true;
 	 */
 	start_with = (open_arguments, use_inner = false) => {
-		const text_before = this.builder.document.createTextNode(open_arguments);
+		const text_before = this.h_builder.document.createTextNode(open_arguments);
 		if (use_inner) {
-			const parent_node = this.builder.element;
-			const elem = this.builder.element.childNodes[0];
+			const parent_node = this.h_builder.element;
+			const elem = this.h_builder.element.childNodes[0];
 			parent_node.insertBefore(text_before, elem);
 			return;
 		}
-		const parent_node = this.builder.element.parentNode;
+		const parent_node = this.h_builder.element.parentNode;
 		if (!parent_node) {
 			return;
 		}
-		parent_node.insertBefore(text_before, this.builder.element);
+		parent_node.insertBefore(text_before, this.h_builder.element);
 	};
 	/**
 	 * Description
@@ -86,17 +87,17 @@ export class builder_class {
 	 * - true;
 	 */
 	end_with = (close_argument, use_inner = false) => {
-		const text_after = this.builder.document.createTextNode(close_argument);
+		const text_after = this.h_builder.document.createTextNode(close_argument);
 		if (use_inner) {
-			const parent_node = this.builder.element;
-			const elem = this.builder.element.childNodes[0];
+			const parent_node = this.h_builder.element;
+			const elem = this.h_builder.element.childNodes[0];
 			parent_node.insertBefore(text_after, elem.nextSibling);
 			return;
 		}
-		const parent_node = this.builder.element.parentNode;
+		const parent_node = this.h_builder.element.parentNode;
 		if (!parent_node) {
 			return;
 		}
-		parent_node.insertBefore(text_after, this.builder.element.nextSibling);
+		parent_node.insertBefore(text_after, this.h_builder.element.nextSibling);
 	};
 }
