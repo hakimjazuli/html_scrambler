@@ -11,7 +11,6 @@ export class h_build_watcher {
 		this.builder = builder;
 	}
 	run = () => {
-		console.info(`starts watching: "${this.builder.base_path}"`);
 		const watcher = chokidar.watch([this.builder.watch_path, this.builder.classes_path], {
 			ignored: /[\/\\]\./,
 			persistent: true,
@@ -23,6 +22,15 @@ export class h_build_watcher {
 			.on('change', async (path) => {
 				await this.handle_path(path, true);
 			});
+		process.on('exit', (code) => {
+			console.log('Exiting...');
+			watcher.close();
+		});
+		process.on('SIGINT', () => {
+			console.log('Received SIGINT. Exiting...');
+			process.exit(0);
+		});
+		console.info(`starts watching: "${this.builder.base_path}"\n`, 'Press Ctrl+C to exit.');
 	};
 	/**
 	 * @private
