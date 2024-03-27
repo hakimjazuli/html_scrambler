@@ -69,7 +69,7 @@ _index+1_ after the curent index
 ### html example
 
 ```html
-<div id="test" builder b-1="php;foreach;$table as $row">test</div>
+<div id="test" build b-1="php;foreach;$table as $row">test</div>
 ```
 
 _meaning_:
