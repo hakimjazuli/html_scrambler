@@ -1,5 +1,4 @@
 // @ts-check
-import path from 'path';
 
 export class input_helpers {
 	/**
