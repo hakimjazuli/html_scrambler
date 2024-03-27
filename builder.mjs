@@ -129,7 +129,7 @@ export class builder {
 	 * @param {string} string
 	 * @param {string} delimiter
 	 */
-	split_esc = (string, delimiter) => {
+	split = (string, delimiter) => {
 		return string
 			.split(new RegExp(`(?<!\\\\)${delimiter}`))
 			.map((part) => part.replace(/\\/, ''));
@@ -196,7 +196,7 @@ export class builder {
 			if (!commands) {
 				continue;
 			}
-			const [class_, method_, ...args] = this.split_esc(
+			const [class_, method_, ...args] = this.split(
 				commands,
 				this.b_build.attribute_delimiter
 			);
