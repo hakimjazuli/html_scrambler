@@ -1,5 +1,5 @@
 // @ts-check
-import { h_watcher } from '@hakimjazuli/html_scrambler';
+import { h_watcher } from 'html_scrambler';
 
 const watcher = new h_watcher({
 	classes_path: 'app_modules/classes',
