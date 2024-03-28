@@ -47,7 +47,7 @@ watcher.run({
 initiate watcher using
 
 ```shell
-node main.mjs
+node "./h_modules_example/main.mjs"
 ```
 
 ## html call pattern
@@ -83,8 +83,6 @@ which, with our _example class_, **php**, it will result into
 ```php
 <?php foreach($table as $row){ ?><div id="test">test</div><?php };?>
 ```
-
-\* **examples are available in the listed github repo**
 
 ## code splitting
 

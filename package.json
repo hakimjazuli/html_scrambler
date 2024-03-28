@@ -5,6 +5,7 @@
 	"type": "module",
 	"main": "index.mjs",
 	"scripts": {
+		"postinstall": "node copy-files.mjs",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -23,5 +24,8 @@
 		"chokidar": "^3.6.0",
 		"domino": "^2.1.6"
 	},
-	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme"
+	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme",
+	"devDependencies": {
+		"ncp": "^2.0.0"
+	}
 }
