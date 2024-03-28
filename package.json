@@ -1,6 +1,6 @@
 {
 	"name": "@html_first/html_scrambler",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "scramble web standard html static folder into any web html framework",
 	"type": "module",
 	"main": "index.mjs",
