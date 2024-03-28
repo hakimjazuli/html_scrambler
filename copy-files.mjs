@@ -2,9 +2,14 @@
 import ncp from 'ncp';
 import path from 'path';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const folder_ = 'h_modules_example';
-const source_dir = path.join(__dirname, folder_);
+const source_dir = path.join(
+	process.cwd(),
+	'node_modules',
+	'@html_first',
+	'html_scrambler',
+	folder_
+);
 const dest_dir = path.join(process.cwd(), folder_);
 
 const options = {
