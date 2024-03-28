@@ -112,3 +112,5 @@ and create new file at **"${build_path}/component/test.blade.php"** with this
 ```shell
 npm i @html_first/html_scrambler
 ```
+
+get example on github
