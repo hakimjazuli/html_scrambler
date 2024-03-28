@@ -113,5 +113,4 @@ and create new file at **"${build_path}/component/test.blade.php"** with this
 npm i @html_first/html_scrambler
 node ./node_modules/@html_first/html_scrambler/starter.mjs
 
-
 ```
