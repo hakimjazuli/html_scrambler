@@ -1,10 +1,9 @@
 ﻿// @ts-check
 const ncp = require('ncp').ncp;
 const path = require('path');
-
-const source_dir = path.join(__dirname, 'path', 'to', 'source');
-
-const dest_dir = path.join(process.cwd(), 'path', 'to', 'destination');
+const folder_ = 'h_modules_example';
+const source_dir = path.join(__dirname, folder_);
+const dest_dir = path.join(process.cwd(), folder_);
 
 const options = {
 	clobber: true,

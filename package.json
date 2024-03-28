@@ -5,7 +5,7 @@
 	"type": "module",
 	"main": "index.mjs",
 	"scripts": {
-		"postinstall": "node ./node_modules/@html_first/html_scrambler/copy-files.js",
+		"postinstall": "node copy-files.cjs",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
