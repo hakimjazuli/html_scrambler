@@ -5,7 +5,7 @@
 	"type": "module",
 	"main": "index.mjs",
 	"scripts": {
-		"prepare": "node copy-files.js",
+		"postinstall": "node copy-files.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
