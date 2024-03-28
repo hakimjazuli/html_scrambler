@@ -1,6 +1,5 @@
 /.git
 /node_modules
-/html_example
 
 package-lock.json
 
