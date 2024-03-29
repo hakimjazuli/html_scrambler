@@ -86,13 +86,13 @@ which, with our _example class_, **php**, it will result into
 
 ## code splitting
 
-our example class also have **bss** class, which show code example on how to code split one html
-into multiple file
+our example class also have **any builder class children** class, which show code example on how to
+code split one html into multiple file
 
 you can call it using partial method
 
 ```html
-<div id="test" build b-1="bss;partial;component/test.blade.php;@include('view.name')">test</div>
+<div id="test" build b-1="php;partial;component/test.blade.php;@include('view.name')">test</div>
 ```
 
 which will turn main html line into
