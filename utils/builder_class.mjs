@@ -152,4 +152,5 @@ export class builder_class {
 			return true;
 		});
 	};
+	split= this.h_builder.split;
 }
