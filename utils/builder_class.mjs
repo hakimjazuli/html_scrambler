@@ -13,12 +13,14 @@ import { h_builder } from './h_builder.mjs';
  * - this.builder.element is curent element;
  */
 export class builder_class {
+	split;
 	/**
 	 * Description
 	 * @param {h_builder} h_builder
 	 */
 	constructor(h_builder) {
 		this.h_builder = h_builder;
+		this.split = this.h_builder.split;
 	}
 	/**
 	 * Description
@@ -152,5 +154,4 @@ export class builder_class {
 			return true;
 		});
 	};
-	split= this.h_builder.split;
 }
