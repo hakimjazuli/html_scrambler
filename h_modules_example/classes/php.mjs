@@ -20,6 +20,6 @@ export class php extends builder_class {
 	 * - true;
 	 */
 	if = async (if_argument, use_inner = false) => {
-		this.surround_with(`<?php if(${if_argument}){?>`, '<?php };?>', use_inner);
+		this.surround_with(`<?php if(${if_argument}){?>`, '<?php };?>\n', use_inner);
 	};
 }

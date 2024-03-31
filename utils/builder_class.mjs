@@ -148,7 +148,7 @@ export class builder_class {
 	partial = (new_dir, replace = false) => {
 		this.h_builder.save_to(new_dir, async () => {
 			if (replace !== false) {
-				this.replace_with(replace);
+				this.replace_with(`${replace}\n`);
 				return false;
 			}
 			return true;
