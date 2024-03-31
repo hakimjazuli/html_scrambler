@@ -1,7 +1,7 @@
 // @ts-check
 import { builder_class } from '@html_first/html_scrambler';
 
-export class bss extends builder_class {
+export default class extends builder_class {
 	/**
 	 * Description
 	 * @param {Array<string>} target_attribute_n_value

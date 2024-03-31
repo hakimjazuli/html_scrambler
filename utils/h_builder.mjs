@@ -198,10 +198,10 @@ export class h_builder {
 			`${class_name}.mjs`
 		);
 		try {
-			const { [class_name]: ClassObject } = await import(`file://${full_path}`);
+			const { default: ClassObject } = await import(`file://${full_path}`);
 			this.classes[class_name] = ClassObject;
 		} catch (error) {
-			const { [class_name]: ClassObject } = await import(full_path);
+			const { default: ClassObject } = await import(full_path);
 			this.classes[class_name] = ClassObject;
 		}
 	};
