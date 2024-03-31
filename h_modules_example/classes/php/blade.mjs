@@ -1,5 +1,5 @@
 // @ts-check
-import { builder_class } from '../../../index.mjs';
+import { builder_class } from '@html_first/html_scrambler';
 
 export default class extends builder_class {
 	/**
