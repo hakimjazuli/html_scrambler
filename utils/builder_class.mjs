@@ -6,11 +6,11 @@ import { h_builder } from './h_builder.mjs';
  * use attribute:
  * - build, with conjunction of
  * - b-index_number="class_name;method_name;...arguments";
- * -- use this.builder.split, to split arguments using this.builder.b_build.attribute_delimiter variant as argument
+ * -- use this.split, to split arguments using this.h_builder.b_build.attribute_delimiter variant as argument
  *
  * reference on active document
- * - this.builder.document is curent document;
- * - this.builder.element is curent element;
+ * - this.document is curent document;
+ * - this.element is curent element;
  */
 export class builder_class {
 	split;
