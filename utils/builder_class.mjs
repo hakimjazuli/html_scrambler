@@ -39,7 +39,7 @@ export class builder_class {
 	 * Description
 	 * @param {string} argument_open
 	 * @param {string} argument_close
-	 * @param {boolean} [use_inner]
+	 * @param {false|string} [use_inner]
 	 * - false default: use outerHTML of the element to be looped
 	 * - true;
 	 */
