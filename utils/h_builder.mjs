@@ -172,11 +172,20 @@ export class h_builder {
 				this.b_build.attribute_delimiter
 			);
 			this.element.removeAttribute(selected);
-			if (typeof this.classes[class_] === 'undefined') {
-				await this.load_builder_class(class_);
+			try {
+				if (typeof this.classes[class_] === 'undefined') {
+					await this.load_builder_class(class_);
+				}
+				const element_handler = new this.classes[class_](this);
+				await element_handler[method_](...args);
+			} catch (error) {
+				console.log({
+					status: 'instruction not found',
+					class: class_,
+					method: method_,
+					arguments: [...args],
+				});
 			}
-			const element_handler = new this.classes[class_](this);
-			await element_handler[method_](...args);
 			this.index++;
 			selected = this.b_build.instruction(this.index);
 		}
