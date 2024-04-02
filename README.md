@@ -119,6 +119,8 @@ node ./node_modules/@html_first/html_scrambler/starter.mjs
 
 -   **1.0.x** custom classes uses named export, which when using this version dynamic import, it
     need to now exactly the name, which became a problem when you need to namespace the class with
-    nested folder.
--   **2.x.x** custom classes uses default export.
--   **2.1.x** added set_b_next for compound instruction.
+    nested folder;
+-   **2.x.x** custom classes uses default export;
+-   **2.1.x** -- added set_b_next for compound instruction, -- added support for "classes.js" and
+    "classes.ts"(bun) support while still maintaining compatibility for windows "file://" prefixer
+    on node;
