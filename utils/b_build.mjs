@@ -10,6 +10,7 @@ export class b_build {
 		classes: 'app_modules/builder/classes',
 		watch: 'h_export',
 	};
+	extentions = ['mjs', 'js', 'ts'];
 	/**
 	 * @param {number} index
 	 */

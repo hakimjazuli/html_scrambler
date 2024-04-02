@@ -193,14 +193,35 @@ export class h_builder {
 	};
 	classes = {};
 	/**
+	 * Description
+	 * @param {string} full_path_no_ext
+	 * @param {string} ext
+	 */
+	classes_exist = async (full_path_no_ext, ext) => fs.existsSync(`${full_path_no_ext}.${ext}`);
+
+	/**
 	 * @private
 	 * @param {string} class_name
 	 */
 	load_builder_class = async (class_name) => {
-		const full_path = path.join(
+		const full_path_no_ext = path.join(
 			this.h_watcher.classes_path ?? this.b_build.default.classes,
-			`${class_name}.mjs`
+			`${class_name}`
 		);
+		/**
+		 * @type {null|string}
+		 */
+		let full_path = null;
+		const exts = this.b_build.extentions;
+		for (let i = 0; i < exts.length; i++) {
+			if (await this.classes_exist(full_path_no_ext, exts[i])) {
+				full_path = `${full_path_no_ext}.${exts[i]}`;
+				break;
+			}
+		}
+		if (!full_path) {
+			return;
+		}
 		try {
 			const { default: ClassObject } = await import(`file://${full_path}`);
 			this.classes[class_name] = ClassObject;
