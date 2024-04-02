@@ -10,6 +10,10 @@ export class b_build {
 		classes: 'app_modules/builder/classes',
 		watch: 'h_export',
 	};
+	/**
+	 * @param {number} index
+	 */
+	instruction = (index) => `${this.build_prefix}${index}`;
 	build_identifier = 'build';
 	build_prefix = 'b-';
 	attribute_delimiter = ';';

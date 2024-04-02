@@ -153,20 +153,15 @@ export class h_builder {
 		this.handle_save(target_path, dir_path, this.document.documentElement.outerHTML);
 		return;
 	};
-	/**
-	 * Description
-	 * @private
-	 * @param {number} i
-	 */
-	per_element_attr_selector = (i) => `${this.b_build.build_prefix}${i}`;
+	index = 0;
 	/**
 	 * Description
 	 * @private
 	 * @returns {Promise<void>}
 	 */
 	per_element = async () => {
-		let i = 1;
-		let selected = this.per_element_attr_selector(i);
+		this.index = 1;
+		let selected = this.b_build.instruction(this.index);
 		while (this.element.hasAttribute(selected)) {
 			const commands = this.element.getAttribute(selected);
 			if (!commands) {
@@ -182,8 +177,8 @@ export class h_builder {
 			}
 			const element_handler = new this.classes[class_](this);
 			await element_handler[method_](...args);
-			i++;
-			selected = this.per_element_attr_selector(i);
+			this.index++;
+			selected = this.b_build.instruction(this.index);
 		}
 		return;
 	};

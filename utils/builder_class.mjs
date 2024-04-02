@@ -9,8 +9,8 @@ import { h_builder } from './h_builder.mjs';
  * -- use this.split, to split arguments using this.h_builder.b_build.attribute_delimiter variant as argument
  *
  * reference on active document
- * - this.document is curent document;
- * - this.element is curent element;
+ * - this.h_builder.document is curent document;
+ * - this.h_builder.element is curent element;
  */
 export class builder_class {
 	split;
@@ -153,5 +153,30 @@ export class builder_class {
 			}
 			return true;
 		});
+	};
+	/**
+	 * @private
+	 * @param {number} index
+	 */
+	get_current_valid_index = (index) => {
+		index++;
+		while (
+			this.h_builder.element.hasAttribute(`${this.h_builder.b_build.build_prefix}${index}`)
+		) {
+			index++;
+		}
+		return index;
+	};
+	/**
+	 * @protected
+	 * @param {string[]} arguments_
+	 */
+	set_b_next = (...arguments_) => {
+		this.h_builder.element.setAttribute(
+			`${this.h_builder.b_build.instruction(
+				this.get_current_valid_index(this.h_builder.index)
+			)}`,
+			arguments_.join(this.h_builder.b_build.attribute_delimiter)
+		);
 	};
 }
