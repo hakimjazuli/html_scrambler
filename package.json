@@ -19,10 +19,13 @@
 	"bugs": {
 		"url": "https://github.com/hakimjazuli/html_scrambler/issues"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"chokidar": "^3.6.0",
 		"domino": "^2.1.6",
 		"ncp": "^2.0.0"
 	},
-	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme"
+	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme",
+	"dependencies": {
+		"@html_first/simple_queue": "^1.0.1"
+	}
 }

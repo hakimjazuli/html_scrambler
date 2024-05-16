@@ -113,7 +113,7 @@ export class h_builder {
 	 * @returns {Promise<void>}
 	 */
 	handle_html_all = async (watch_path = null) => {
-		watch_path = watch_path ?? this.h_watcher.watch_path;
+		watch_path = watch_path ?? this.h_watcher.html_watch_path;
 		const html_s = fs.readdirSync(watch_path);
 		for (let i = 0; i < html_s.length; i++) {
 			const file = html_s[i];
@@ -205,7 +205,7 @@ export class h_builder {
 	 */
 	load_builder_class = async (class_name) => {
 		const full_path_no_ext = path.join(
-			this.h_watcher.classes_path ?? this.b_build.default.classes,
+			this.h_watcher.instuction_classes_path ?? this.b_build.default.classes,
 			`${class_name}`
 		);
 		/**

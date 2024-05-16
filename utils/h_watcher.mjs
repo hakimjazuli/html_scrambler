@@ -1,28 +1,29 @@
 // @ts-check
 import fs from 'fs';
 import path from 'path';
+import process from 'process';
 import chokidar from 'chokidar';
 import { h_builder } from './h_builder.mjs';
 /**
  * @typedef h_watcher_option
- * @property {string} classes_path
- * @property {string} watch_path
+ * @property {string} instuction_classes_path
+ * @property {string} html_watch_path
  */
 
 export class h_watcher {
 	/** @type {string} */
-	watch_path;
+	html_watch_path;
 	/** @type {string} */
-	classes_path;
+	instuction_classes_path;
 	/** @type {string} */
 	base_path;
 	/**
 	 * @param {h_watcher_option} options
 	 */
-	constructor({ classes_path, watch_path }) {
+	constructor({ instuction_classes_path: classes_path, html_watch_path: watch_path }) {
 		this.base_path = process.cwd();
-		this.classes_path = path.join(this.base_path, classes_path);
-		this.watch_path = path.join(this.base_path, watch_path);
+		this.instuction_classes_path = path.join(this.base_path, classes_path);
+		this.html_watch_path = path.join(this.base_path, watch_path);
 	}
 	/**
 	 * @typedef {import('./h_builder.mjs').h_builder_options} h_builder_options
@@ -35,7 +36,7 @@ export class h_watcher {
 	 */
 	run = (options) => {
 		this.options = options;
-		const watcher = chokidar.watch([this.watch_path, this.classes_path], {
+		const watcher = chokidar.watch([this.html_watch_path, this.instuction_classes_path], {
 			ignored: /[\/\\]\./,
 			persistent: true,
 		});
@@ -75,17 +76,17 @@ export class h_watcher {
 	 */
 	handle_path = async (path_, is_change = false) => {
 		const h_builder_ = new h_builder(this, this.options);
-		if (!path_.startsWith(this.watch_path)) {
+		if (!path_.startsWith(this.html_watch_path)) {
 			if (is_change) {
 				await h_builder_.handle_html_all();
-				console.info(`render build for all "${this.watch_path}/*.html"`);
+				console.info(`render build for all "${this.html_watch_path}/*.html"`);
 				return;
 			}
 		} else if (!path_.endsWith('.html')) {
 			this.copy_file(
 				path_,
 				path_.replace(
-					this.watch_path,
+					this.html_watch_path,
 					path.join(this.base_path, this.options.main_static_path)
 				)
 			);
