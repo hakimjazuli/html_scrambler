@@ -1,9 +1,8 @@
 // @ts-check
-import { builder_class } from '@html_first/html_scrambler';
+import { _BuilderClass } from '@html_first/html_scrambler';
 
-export default class extends builder_class {
+export default class extends _BuilderClass {
 	/**
-	 * Description
 	 * @param {string} new_dir
 	 * @param {string} data
 	 */

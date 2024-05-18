@@ -28,26 +28,49 @@ create file in your project folder
 ```js
 // main.mjs
 // @ts-check
-import { h_watcher } from '@html_first/html_scrambler';
 
-const watcher = new h_watcher({
+import { __Watcher } from '@html_first/html_scrambler';
+import { AppSettings } from './AppSettings.mjs';
+
+new __Watcher(AppSettings).run();
+```
+
+```js
+// AppSettings.mjs
+// @ts-check
+
+import { __AppSettings } from '@html_first/html_scrambler';
+
+export class AppSettings extends __AppSettings {
 	/**
-	 * options
-	 * make no worries as we already make it type safe and ?documented? inside the module
+	 * modify public non-readonly property here
 	 */
-});
-watcher.run({
-	/**
-	 * options
-	 * ditto
-	 */
-});
+}
 ```
 
 initiate watcher using
 
 ```shell
-node "./h_modules_example/main.mjs"
+node ./path/to/your/main.mjs
+```
+
+or add it to your `package.json` scripts object
+
+```json
+{...
+"scripts":{
+	...
+	"scrambler":"node ./path/to/your/main.mjs",
+	...
+}
+...
+}
+```
+
+then
+
+```shell
+npm run scrambler
 ```
 
 ## html call pattern
@@ -62,9 +85,9 @@ _index+1_ after the curent index
 
 **nb**
 
--   you might want to utilize attribute_delimiter_2 and attribute_delimiter_3 from (inside builder
-    class) this.builder.b_build.attribute_delimiter_2 or this.builder.b_build.attribute_delimiter_3
-    for this.builder.split to split with escaped curent delimiter
+-   you might want to utilize `__AppSettings.__.separator[1]` and `[2]` from (inside
+    `_BuilderClass`)`__AppSettings.__.separator[1]` or `[2]` for this.builder.split to split with
+    escaped curent delimiter
 
 ### html example
 
@@ -115,12 +138,28 @@ node ./node_modules/@html_first/html_scrambler/starter.mjs
 
 ```
 
+## Library Naming Convenience
+
+-   classes that are **PREFIXED** with "\_\_" are globals, can be accessed with its "\_\_" static
+    method, no need to be instantiated after the `new __Watcher(AppSettings).run();` script;
+-   classes that are **PREFIXED** with "\_" are meant to be used in your app;
+-   classes that are **NOT PREFIXED** with any "\_" are meant for library internals;
+
 ## version info
 
 -   **1.0.x** custom classes uses named export, which when using this version dynamic import, it
     need to now exactly the name, which became a problem when you need to namespace the class with
     nested folder;
 -   **2.x.x** custom classes uses default export;
--   **2.1.x** -- added set_b_next for compound instruction, -- added support for "classes.js" and
-    "classes.ts"(bun) support while still maintaining compatibility for windows "file://" prefixer
-    on node;
+-   **2.1.x**
+    > -   added set_b_next for compound instruction,
+    > -   added support for "classes.js" and
+        "classes.ts"(bun) support while still maintaining compatibility for windows "file://" prefixer
+        on node;
+-   **3.0.x**
+    > -   change on how to modify app behaviour using `__AppSettings`:
+    > -   temporraily drop classes extention support
+    >     > -   `js`,
+    >     > -   `ts` (bun),
+    > -   quick lookup seems it's the problem with either node or npm version of mine, cannot really
+    >     check, I'm sorry, you have to stick with `mjs` with JSDOC for the time being:

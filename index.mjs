@@ -1,11 +1,8 @@
 // @ts-check
-import { builder_class } from './utils/builder_class.mjs';
-import { h_watcher } from './utils/h_watcher.mjs';
 
-/** @typedef {import('./utils/b_build.mjs').b_build} b_build */
-/** @typedef {import('./utils/h_builder.mjs').h_builder} h_builder */
-/** @typedef {import('./utils/h_builder.mjs').h_builder_options} h_builder_options*/
-/** @typedef {import('./utils/h_watcher.mjs').h_watcher_option} h_watcher_option*/
-/** @typedef {import('./utils/input_helpers.mjs').input_helpers} input_helpers */
+import { _BuilderClass } from './src/utils/_BuilderClass.mjs';
+import { Builder } from './src/utils/Builder.mjs';
+import { __Watcher } from './src/utils/__Watcher.mjs';
+import { __AppSettings } from './src/vars/__AppSettings.mjs';
 
-export { h_watcher, builder_class };
+export { __Watcher, __AppSettings, _BuilderClass, Builder as __Builder };
