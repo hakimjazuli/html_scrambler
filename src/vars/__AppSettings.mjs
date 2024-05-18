@@ -17,14 +17,14 @@ import { __StringHelpers } from '../utils/__StringHelpers.mjs';
 
 export class __AppSettings {
 	/** @type {string} */
-	_html_watch_path = './builder/html_first/src';
+	_html_watch_path = 'builder/html_first/src';
 	/** @type {string} */
-	_instuction_classes_path = './builder/html_first/classes';
+	_instuction_classes_path = 'builder/html_first/classes';
 
 	/** @type {string} */
 	_public_static = 'public';
 	/** @type {string} */
-	_build_path = 'dist';
+	_build_path = 'builder/html_first/result';
 	/** @type {boolean} */
 	_disable_indent = false;
 
