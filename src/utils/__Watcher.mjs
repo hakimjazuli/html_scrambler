@@ -33,15 +33,18 @@ export class __Watcher {
 	/** @string */
 	instuction_classes_path;
 	/**
-	 * @param {[path:string,callback:()=>Promise<void>][]} [path_callback]
+	 * @typedef {{path:string,callback:()=>Promise<void>}[]} path_callback_type
+	 */
+	/**
+	 * @param {path_callback_type} [path_callback]
 	 */
 	run = (path_callback = undefined) => {
 		const paths = [this.watch_path, this.instuction_classes_path];
 		if (path_callback) {
 			for (let i = 0; i < path_callback.length; i++) {
-				const [path_, callback] = path_callback[i];
+				const { path: path_, callback } = path_callback[i];
 				const path__ = path.join(this.base_path, path_);
-				path_callback[i] = [path__, callback];
+				path_callback[i] = { path: path__, callback };
 				paths.push(path__);
 			}
 		}
@@ -82,7 +85,7 @@ export class __Watcher {
 	 * @private
 	 * @param {string} path_
 	 * @param {boolean} is_change
-	 * @param {[path:string,callback:()=>Promise<void>][]} [path_callback]
+	 * @param {path_callback_type} [path_callback]
 	 */
 	handle_path = async (path_, is_change, path_callback = undefined) => {
 		const __app_settings = __AppSettings.__;
@@ -90,7 +93,7 @@ export class __Watcher {
 		const builder = new Builder();
 		if (path_callback) {
 			for (let i = 0; i < path_callback.length; i++) {
-				const [path__, callback] = path_callback[i];
+				const { path: path__, callback } = path_callback[i];
 				if (path_.startsWith(path__)) {
 					await callback();
 					console.info(`render ${__app_settings.colorize_('custom run')} for ${path_}`);
