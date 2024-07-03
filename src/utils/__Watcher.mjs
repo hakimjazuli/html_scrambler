@@ -45,7 +45,6 @@ export class __Watcher {
 				paths.push(path__);
 			}
 		}
-		console.log({ paths });
 		const watcher = chokidar.watch(paths, {
 			ignored: /[\/\\]\./,
 			persistent: true,
@@ -94,7 +93,7 @@ export class __Watcher {
 				const [path__, callback] = path_callback[i];
 				if (path_.startsWith(path__)) {
 					await callback();
-					console.info(`render ${__app_settings.colorize_('custom run')} for ${path__}`);
+					console.info(`render ${__app_settings.colorize_('custom run')} for ${path_}`);
 					return;
 				}
 			}
