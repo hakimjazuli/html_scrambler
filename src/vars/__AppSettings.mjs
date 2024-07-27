@@ -113,7 +113,6 @@ export class __AppSettings {
 				' $1',
 			],
 			[/<\?="(.*?)\?">/g, '<?= $1 ?>'],
-			[/^[\s]+| {2,}/gm, ''],
 			...this._filter,
 			...this.indent_filter(),
 		];
