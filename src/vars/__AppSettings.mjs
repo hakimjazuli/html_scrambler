@@ -21,8 +21,16 @@ export class __AppSettings {
 	/** @type {string} */
 	_instuction_classes_path = 'builder/html_first/classes';
 
-	/** @type {string} */
-	_public_static = 'public';
+	/**
+	 * for the files inside folders
+	 * @type {string}
+	 */
+	_public_subfolders_static = 'public';
+	/**
+	 * for files on the root folder
+	 * @type {string}
+	 */
+	_public_root_static = 'public';
 	/** @type {string} */
 	_build_path = 'builder/html_first/result';
 	/** @type {boolean} */

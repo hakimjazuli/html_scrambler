@@ -110,10 +110,14 @@ export class __Watcher {
 				return;
 			}
 		} else if (!path_.endsWith('.html')) {
-			this.copy_file(
-				path_,
-				path_.replace(watch_path, path.join(this.base_path, __app_settings._public_static))
-			);
+			const in_a_folder = path_.replace(`${watch_path}\\`, '').includes('\\');
+			let send_to = '';
+			if (in_a_folder) {
+				send_to = path.join(this.base_path, __app_settings._public_subfolders_static);
+			} else {
+				send_to = path.join(this.base_path, __app_settings._public_root_static);
+			}
+			this.copy_file(path_, path_.replace(watch_path, send_to));
 			return;
 		} else {
 			await builder.handle_html(path_);
