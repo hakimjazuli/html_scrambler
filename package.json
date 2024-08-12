@@ -26,6 +26,6 @@
 	},
 	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme",
 	"dependencies": {
-		"@html_first/simple_queue": "^1.2.0"
+		"@html_first/simple_signal": "^2.4.4"
 	}
 }

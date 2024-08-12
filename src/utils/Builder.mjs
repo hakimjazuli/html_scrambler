@@ -6,7 +6,6 @@ import domino from 'domino';
 import { __Watcher } from './__Watcher.mjs';
 import { __AppSettings } from '../vars/__AppSettings.mjs';
 import { __StringHelpers } from './__StringHelpers.mjs';
-import { _QueueObject } from '@html_first/simple_queue';
 
 export class Builder {
 	/** @type {Document} document */
@@ -95,10 +94,12 @@ export class Builder {
 				await element_handler[method_](...args);
 			} catch (error) {
 				console.log({
-					status: 'instruction not found',
-					class: class_,
-					method: method_,
-					arguments: [...args],
+					error,
+					instruction: {
+						class: class_,
+						method: method_,
+						arguments: [...args],
+					},
 				});
 			}
 			this.index++;
