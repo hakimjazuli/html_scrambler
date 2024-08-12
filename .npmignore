@@ -2,10 +2,12 @@
 /node_modules
 /server
 /public
-
-package-lock.json
-
 .gitignore
 .npmignore
 
+package-lock.json
+
+
 bun.lockb
+
+src2

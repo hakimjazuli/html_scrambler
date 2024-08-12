@@ -190,7 +190,7 @@ export class Builder {
 	 * @param {string} new_attribute_name
 	 * @param {string} attribute
 	 */
-	class_attribute_resolver_single = (element, new_attribute_name, attribute) => {
+	attribute_resolver_single = (element, new_attribute_name, attribute) => {
 		element.setAttribute(new_attribute_name, element.getAttribute(attribute) ?? '');
 		element.removeAttribute(attribute);
 	};
@@ -199,11 +199,7 @@ export class Builder {
 	 * @param {string} file_path
 	 * @param {boolean} [check_element_attribute]
 	 */
-	class_attribute_resolver = (file_path, check_element_attribute = false) => {
-		if (check_element_attribute) {
-			this.element.setAttribute('className', this.element.getAttribute('class') ?? '');
-			this.element.removeAttribute('class');
-		}
+	attribute_resolver = (file_path, check_element_attribute = false) => {
 		let class_;
 		const attribute_resolver = __AppSettings.__.attribute_resolver();
 		for (const extention in attribute_resolver) {
@@ -212,21 +208,16 @@ export class Builder {
 				for (const attribute in handler) {
 					const new_attribute_name = handler[attribute];
 					if (check_element_attribute) {
-						this.class_attribute_resolver_single(
-							this.element,
-							new_attribute_name,
-							attribute
-						);
+						this.attribute_resolver_single(this.element, new_attribute_name, attribute);
 					}
 					while ((class_ = this.element.querySelector(`[${attribute}]`))) {
-						this.class_attribute_resolver_single(class_, new_attribute_name, attribute);
+						this.attribute_resolver_single(class_, new_attribute_name, attribute);
 					}
 				}
 			}
 		}
 	};
 	/**
-
 	 * @param {string} file_path
 	 * @param {()=>Promise<boolean>} callback
 	 * return boolan whether to use only innerHTML (or outerHTML)
@@ -239,10 +230,10 @@ export class Builder {
 		const dir_path = path.dirname(file_path);
 		let content = '';
 		if (only_inner) {
-			this.class_attribute_resolver(file_path);
+			this.attribute_resolver(file_path);
 			content = this.element.innerHTML;
 		} else {
-			this.class_attribute_resolver(file_path, true);
+			this.attribute_resolver(file_path, true);
 			content = this.element.outerHTML;
 		}
 		this.handle_save(file_path, dir_path, content);
