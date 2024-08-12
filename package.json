@@ -25,7 +25,7 @@
 		"ncp": "^2.0.0"
 	},
 	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme",
-	"dependencies": {
+	"Dependencies": {
 		"@html_first/simple_signal": "^2.4.4"
 	}
 }
