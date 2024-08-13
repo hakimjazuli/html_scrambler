@@ -160,9 +160,9 @@ export class Builder {
 				fs.mkdirSync(dir_path, { recursive: true });
 				fs.writeFileSync(
 					file_path,
-					`${export_start}${__StringHelpers.__.interpret_special_chars(
+					`${export_start} ${__StringHelpers.__.interpret_special_chars(
 						__StringHelpers.__.uncomment_document(content)
-					)}${export_end}`,
+					)} ${export_end}`,
 					'utf8'
 				);
 				return;
@@ -177,9 +177,9 @@ export class Builder {
 				);
 				const new_content = old_content.replace(
 					regex,
-					`${export_start}${__StringHelpers.__.interpret_special_chars(
+					`${export_start} ${__StringHelpers.__.interpret_special_chars(
 						__StringHelpers.__.uncomment_document(content)
-					)}${export_end}`
+					)} ${export_end}`
 				);
 				fs.writeFileSync(file_path, new_content, 'utf8');
 			}

@@ -143,6 +143,9 @@ export class _BuilderClass {
 			}
 			return true;
 		});
+		if (replace !== false) {
+			this.builder.element.innerHTML = replace;
+		}
 	};
 	/**
 	 * @private

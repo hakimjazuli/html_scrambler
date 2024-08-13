@@ -24,8 +24,5 @@
 		"domino": "^2.1.6",
 		"ncp": "^2.0.0"
 	},
-	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme",
-	"Dependencies": {
-		"@html_first/simple_signal": "^2.4.4"
-	}
+	"homepage": "https://github.com/hakimjazuli/html_scrambler#readme"
 }

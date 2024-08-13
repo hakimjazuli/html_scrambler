@@ -6,7 +6,6 @@ import chokidar from 'chokidar';
 import { __AppSettings } from '../vars/__AppSettings.mjs';
 import { Builder } from './Builder.mjs';
 import { __StringHelpers } from './__StringHelpers.mjs';
-import { $, Let } from '@html_first/simple_signal';
 
 export class __Watcher {
 	/** @type {__Watcher} */
@@ -33,12 +32,6 @@ export class __Watcher {
 	watch_path;
 	/** @string */
 	instuction_classes_path;
-
-	workPath = new Let({
-		workPath: '',
-		workMode: false,
-		workCallback: [{ path: '', callback: async () => {} }],
-	});
 	/**
 	 * @typedef {{path:string,callback:()=>Promise<void>}[]} path_callback_type
 	 */
@@ -59,29 +52,12 @@ export class __Watcher {
 			ignored: /[\/\\]\./,
 			persistent: true,
 		});
-		new $(async (first) => {
-			const { workPath, workMode, workCallback } = this.workPath.value;
-			if (first) {
-				return;
-			}
-			await this.handle_path(workPath, workMode, workCallback);
-		});
 		watcher
 			.on('add', async (path) => {
-				this.workPath.value = {
-					workPath: path,
-					workMode: false,
-					// @ts-ignore
-					workCallback: path_callback,
-				};
+				this.handle_path(path, false, path_callback);
 			})
 			.on('change', async (path) => {
-				this.workPath.value = {
-					workPath: path,
-					workMode: true,
-					// @ts-ignore
-					workCallback: path_callback,
-				};
+				this.handle_path(path, true, path_callback);
 			});
 		process.on('exit', (code) => {
 			console.log('Exiting...');
@@ -91,7 +67,7 @@ export class __Watcher {
 			console.log('Received SIGINT. Exiting...');
 			process.exit(0);
 		});
-		// console.info(`\nstarts watching: "${this.base_path}"\n`, 'Press Ctrl+C to exit.');
+		console.info(`\nstarts watching: "${this.base_path}"\n`, 'Press Ctrl+C to exit.');
 	};
 	/**
 	 * @private
@@ -102,7 +78,7 @@ export class __Watcher {
 		const targetDir = path.dirname(target);
 		fs.mkdir(targetDir, { recursive: true }, (err) => {
 			fs.copyFileSync(source, target);
-			// console.info(`copy file from: "${source}" to: "${target}"`);
+			console.info(`copy file from: "${source}" to: "${target}"`);
 		});
 	};
 	/**
@@ -120,7 +96,7 @@ export class __Watcher {
 				const { path: path__, callback } = path_callback[i];
 				if (path_.startsWith(path__)) {
 					await callback();
-					// console.info(`render ${__app_settings.colorize_('custom run')} for ${path_}`);
+					console.info(`render ${__app_settings.colorize_('custom run')} for ${path_}`);
 					return;
 				}
 			}
@@ -128,9 +104,9 @@ export class __Watcher {
 		if (!path_.startsWith(watch_path)) {
 			if (is_change) {
 				await builder.handle_html_all();
-				// console.info(
-				// 	`render build for ${__app_settings.colorize_('ALL OF')} "${watch_path}/*.html"`
-				// );
+				console.info(
+					`render build for ${__app_settings.colorize_('ALL OF')} "${watch_path}/*.html"`
+				);
 				return;
 			}
 		} else if (!path_.endsWith('.html')) {
@@ -145,7 +121,7 @@ export class __Watcher {
 			return;
 		} else {
 			await builder.handle_html(path_);
-			// console.info(`render build for ${__app_settings.colorize_('SINGLE')} "${path_}"`);
+			console.info(`render build for ${__app_settings.colorize_('SINGLE')} "${path_}"`);
 		}
 	};
 }
