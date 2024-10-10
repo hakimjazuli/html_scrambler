@@ -1,9 +1,14 @@
 // @ts-check
-import { _BuilderClass } from '@html_first/html_scrambler';
+import { Builder } from '@html_first/html_scrambler';
 
-export default class extends _BuilderClass {
-	compound = (class_name, method, ...arguments_) => {
-		this.set_b_next('php', 'if', '$data');
-		this.set_b_next(class_name, method, ...arguments_);
+export default class extends Builder {
+	/**
+	 * @param {string} className
+	 * @param {string} method
+	 * @param {...string} arguments_
+	 */
+	static compound = (className, method, ...arguments_) => {
+		Builder.setBNext('php', 'if', '$data');
+		Builder.setBNext(className, method, ...arguments_);
 	};
 }

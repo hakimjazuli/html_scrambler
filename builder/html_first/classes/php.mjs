@@ -1,23 +1,23 @@
 // @ts-check
-import { _BuilderClass } from '@html_first/html_scrambler';
+import { Builder } from '@html_first/html_scrambler';
 
-export default class extends _BuilderClass {
+export default class extends Builder {
 	/**
-	 * @param {string} foreach_argument
-	 * @param {string|false} [use_inner]
+	 * @param {string} foreachArgument
+	 * @param {string|false} [surroundInner]
 	 * - false default: use outerHTML of the element to be looped
 	 * - true;
 	 */
-	foreach = async (foreach_argument, use_inner = false) => {
-		this.surround_with(`<?php foreach(${foreach_argument}){?>`, '<?php };?>', use_inner);
+	static foreach = async (foreachArgument, surroundInner = false) => {
+		Builder.surroundWith(`<?php foreach(${foreachArgument}){?>`, '<?php };?>', surroundInner);
 	};
 	/**
-	 * @param {string} if_argument
-	 * @param {string|false} [use_inner]
+	 * @param {string} ifArgument
+	 * @param {string|false} [surroundInner]
 	 * - false default: use outerHTML of the element to be looped
 	 * - true;
 	 */
-	if = async (if_argument, use_inner = false) => {
-		this.surround_with(`<?php if(${if_argument}){?>`, '<?php };?>\n', use_inner);
+	static if = async (ifArgument, surroundInner = false) => {
+		Builder.surroundWith(`<?php if(${ifArgument}){?>`, '<?php };?>\n', surroundInner);
 	};
 }

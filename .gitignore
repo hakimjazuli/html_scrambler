@@ -4,6 +4,8 @@
 /public
 .gitignore
 .npmignore
+README_old.md
+tsconfig.json
 
 package-lock.json
 
@@ -11,3 +13,5 @@ package-lock.json
 bun.lockb
 
 src2
+
+dev

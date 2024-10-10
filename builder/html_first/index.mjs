@@ -1,6 +1,10 @@
 // @ts-check
 
-import { __Watcher } from '@html_first/html_scrambler';
-import { AppSettings } from './AppSettings.mjs';
+import { HTMLScrambler } from '@html_first/html_scrambler';
 
-new __Watcher(AppSettings).run();
+new HTMLScrambler({
+	_htmlWatchPath: '/builder/html_first/src/',
+	_buildPath: '/mockFolderBackEnd/',
+	_publicRootStatic: '/public/',
+	_publicSubfoldersStatic: '/mockFolderBackEnd/index/',
+});
