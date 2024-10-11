@@ -6,7 +6,7 @@
  * @copyright
  * developed and published under MIT license,
  * @description
- * ## a simple yet highly extendable `nodeJS`/`JSRuntime with fs capability` SSG scrambler library.
+ * ## a simple yet highly extendable SSG scrambler library for `nodeJS`/`JSRuntime with fs capability`.
  * for scrambling generated static web html resources from, including but not limited to:
  * -   `bootstrap studio`.
  * -   `pinegrow`.

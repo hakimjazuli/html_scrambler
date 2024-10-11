@@ -184,12 +184,12 @@ export class HTMLScrambler {
 	 */
 	_buildAttrIdentifier;
 	/**
-	 * @private
+	 * @public
 	 * @type {string}
 	 */
 	_buildPrefix;
 	/**
-	 * @private
+	 * @public
 	 * @type {[string,string,string]}
 	 */
 	_separator;

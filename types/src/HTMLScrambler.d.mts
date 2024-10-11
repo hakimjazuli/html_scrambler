@@ -202,20 +202,20 @@ export class HTMLScrambler {
      */
     private _buildAttrIdentifier;
     /**
-     * @private
+     * @public
      * @type {string}
      */
-    private _buildPrefix;
+    public _buildPrefix: string;
     /**
      * @private
      * @type {boolean}
      */
     private _disableIndent;
     /**
-     * @private
+     * @public
      * @type {[string,string,string]}
      */
-    private _separator;
+    public _separator: [string, string, string];
     /**
      * @private
      * @type {resolverType}
