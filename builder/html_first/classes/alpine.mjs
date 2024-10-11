@@ -12,7 +12,7 @@ export default class extends Builder {
 	 */
 	static for = async (forArgument, key = 'id', useInner = false) => {
 		Builder.surroundWith(
-			`<template x-for_="${forArgument}" :key="${key}">`,
+			`<template x-for="${forArgument}" :key="${key}">`,
 			'</template>',
 			useInner
 		);
