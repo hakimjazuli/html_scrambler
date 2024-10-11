@@ -126,7 +126,7 @@ export class HTMLScrambler {
     /**
      * @param {Object} settings
      * @param {string} [settings._htmlWatchPath]
-     * @param {string} [settings._builderClassInstanceFolderPath]
+     * @param {string} [settings._builderClassFolderPath]
      * @param {string} [settings._publicSubfoldersStatic]
      * - send non-`*.html` files that are on the subFolders to this string `path`;
      * @param {string} [settings._publicRootStatic]
@@ -155,9 +155,9 @@ export class HTMLScrambler {
      * - [...[string|regExp,string]];
      * @param {Record<string,string>} [settings._replacesFilenameWith]
      */
-    constructor({ _htmlWatchPath, _builderClassInstanceFolderPath, _publicRootStatic, _publicSubfoldersStatic, _buildPath, _buildAttrIdentifier, _buildPrefix, _disableIndent, _separator, _renameAttribute, _openingClosingTagsRules, _replacesFilenameWith, _replaceStringWith, _voidElementTags, }: {
+    constructor({ _htmlWatchPath, _builderClassFolderPath, _publicRootStatic, _publicSubfoldersStatic, _buildPath, _buildAttrIdentifier, _buildPrefix, _disableIndent, _separator, _renameAttribute, _openingClosingTagsRules, _replacesFilenameWith, _replaceStringWith, _voidElementTags, }: {
         _htmlWatchPath?: string;
-        _builderClassInstanceFolderPath?: string;
+        _builderClassFolderPath?: string;
         _publicSubfoldersStatic?: string;
         _publicRootStatic?: string;
         _buildPath?: string;
@@ -180,7 +180,7 @@ export class HTMLScrambler {
      * @private
      * @type {string}
      */
-    private _builderClassInstanceFolderPath;
+    private _builderClassFolderPath;
     /**
      * @private
      * @type {string}

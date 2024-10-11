@@ -6,7 +6,7 @@ import { HTMLScrambler } from './HTMLScrambler.mjs';
  * @description
  * - create a file with exported default by extending this class with static method instructions;
  * ```js
- * // on `${_builderClassInstanceFolderPath}/someClass.mjs`
+ * // on `${_builderClassFolderPath}/someClass.mjs`
  * // @ts-check
  * import { Builder } from '@html_first/html_scrambler'
  * export default class extends Builder{

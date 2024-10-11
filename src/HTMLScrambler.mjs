@@ -56,7 +56,7 @@ export class HTMLScrambler {
 	/**
 	 * @param {Object} settings
 	 * @param {string} [settings._htmlWatchPath]
-	 * @param {string} [settings._builderClassInstanceFolderPath]
+	 * @param {string} [settings._builderClassFolderPath]
 	 * @param {string} [settings._publicSubfoldersStatic]
 	 * - send non-`*.html` files that are on the subFolders to this string `path`;
 	 * @param {string} [settings._publicRootStatic]
@@ -87,7 +87,7 @@ export class HTMLScrambler {
 	 */
 	constructor({
 		_htmlWatchPath = 'builder/html_first/src',
-		_builderClassInstanceFolderPath = 'builder/html_first/classes',
+		_builderClassFolderPath = 'builder/html_first/classes',
 		_publicRootStatic = 'public',
 		_publicSubfoldersStatic = 'public',
 		_buildPath = 'builder/html_first/result',
@@ -106,7 +106,7 @@ export class HTMLScrambler {
 		}
 		HTMLScrambler.__ = this;
 		this._htmlWatchPath = _htmlWatchPath;
-		this._builderClassInstanceFolderPath = _builderClassInstanceFolderPath;
+		this._builderClassFolderPath = _builderClassFolderPath;
 		this._publicRootStatic = _publicRootStatic;
 		this._publicSubfoldersStatic = _publicSubfoldersStatic;
 		this._buildPath = _buildPath;
@@ -120,7 +120,7 @@ export class HTMLScrambler {
 		this._replaceStringWith = _replaceStringWith;
 		this._voidElementTags = _voidElementTags;
 		this.watchPath = pathJoin(this.basePath, _htmlWatchPath);
-		this.instuctionClassesPath = pathJoin(this.basePath, _builderClassInstanceFolderPath);
+		this.instuctionClassesPath = pathJoin(this.basePath, _builderClassFolderPath);
 	}
 	/**
 	 * @private
@@ -152,7 +152,7 @@ export class HTMLScrambler {
 	 * @private
 	 * @type {string}
 	 */
-	_builderClassInstanceFolderPath;
+	_builderClassFolderPath;
 	/**
 	 * @private
 	 * @type {string}
