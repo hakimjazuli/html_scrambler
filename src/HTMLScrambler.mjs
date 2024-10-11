@@ -397,7 +397,7 @@ export class HTMLScrambler {
 			process.exit();
 		});
 		console.info(
-			`\nstarts watching: ${this.colorize('${this.basePath}')}\n`,
+			`\nstarts watching: ${this.colorize(this.basePath)}\n`,
 			'Press Ctrl+C to exit.'
 		);
 	};
