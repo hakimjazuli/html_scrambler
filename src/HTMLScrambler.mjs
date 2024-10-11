@@ -365,7 +365,7 @@ export class HTMLScrambler {
 	 * @typedef {{path:string,callback:()=>Promise<void>}} pathCallbackType
 	 */
 	/**
-	 * @param {...pathCallbackType} [pathCallback]
+	 * @param {...pathCallbackType} pathCallback
 	 */
 	run = (...pathCallback) => {
 		const paths = [this.watchPath];

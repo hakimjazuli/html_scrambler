@@ -327,9 +327,9 @@ export class HTMLScrambler {
      * @typedef {{path:string,callback:()=>Promise<void>}} pathCallbackType
      */
     /**
-     * @param {...pathCallbackType} [pathCallback]
+     * @param {...pathCallbackType} pathCallback
      */
-    run: (...pathCallback?: {
+    run: (...pathCallback: {
         path: string;
         callback: () => Promise<void>;
     }[]) => void;
