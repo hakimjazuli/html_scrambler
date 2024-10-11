@@ -38,9 +38,10 @@
  */
 export class HTMLScrambler {
     /**
+     * @public
      * @type {HTMLScrambler}
      */
-    static __: HTMLScrambler;
+    public static __: HTMLScrambler;
     /**
      * @type {Document}
      */
@@ -54,26 +55,29 @@ export class HTMLScrambler {
      */
     static index: number;
     /**
+     * @private
      * @type {Record<string, import('./Builder.mjs').Builder>}
      */
-    static instances: Record<string, import("./Builder.mjs").Builder>;
+    private static instances;
     /**
+     * @private
      * @param {string} watchPath
      * @returns {Promise<void>}
      */
-    static handleHtmlAll: (watchPath: string) => Promise<void>;
+    private static handleHtmlAll;
     /**
-     * @public
+     * @private
      * @param {string} htmlPath
      * @returns {Promise<void>}
      */
-    public static handleHtml: (htmlPath: string) => Promise<void>;
+    private static handleHtml;
     /**
      * split with escapeString `/`
+     * @public
      * @param {string} string
      * @param {string} delimiter
      */
-    static splitX: (string: string, delimiter: string) => string[];
+    public static splitX: (string: string, delimiter: string) => string[];
     /**
      * @private
      * @returns {Promise<void>}
@@ -85,10 +89,11 @@ export class HTMLScrambler {
      */
     private static loadBuilderClass;
     /**
+     * @private
      * @param {string} fullPathNoExt
      * @param {string} ext
      */
-    static classesExist: (fullPathNoExt: string, ext: string) => Promise<boolean>;
+    private static classesExist;
     /**
      * @private
      * @param {string} filePath
@@ -97,11 +102,12 @@ export class HTMLScrambler {
      */
     private static handleSave;
     /**
+     * @private
      * @param {HTMLElement|Element} element
      * @param {string} newAttributeName
      * @param {string} attribute
      */
-    static attributeResolverSingle: (element: HTMLElement | Element, newAttributeName: string, attribute: string) => void;
+    private static attributeResolverSingle;
     /**
      * @private
      * @param {string} filePath
@@ -109,13 +115,14 @@ export class HTMLScrambler {
      */
     private static attributeResolver;
     /**
+     * @public
      * @param {string} filePath
      * @param {()=>Promise<boolean>} asyncCallback
      * return boolan whether to use only innerHTML (or outerHTML)
      * - false default;
      * - true: save only innerHTML of the element to filepath
      */
-    static saveTo: (filePath: string, asyncCallback: () => Promise<boolean>) => Promise<void>;
+    public static saveTo: (filePath: string, asyncCallback: () => Promise<boolean>) => Promise<void>;
     /**
      * @param {Object} settings
      * @param {string} [settings._htmlWatchPath]
@@ -165,78 +172,100 @@ export class HTMLScrambler {
         _replacesFilenameWith?: Record<string, string>;
     });
     /**
+     * @private
      * @type {string}
      */
-    _htmlWatchPath: string;
+    private _htmlWatchPath;
     /**
+     * @private
      * @type {string}
      */
-    _builderClassInstanceFolderPath: string;
+    private _builderClassInstanceFolderPath;
     /**
+     * @private
      * @type {string}
      */
-    _publicRootStatic: string;
+    private _publicRootStatic;
     /**
+     * @private
      * @type {string}
      */
-    _publicSubfoldersStatic: string;
+    private _publicSubfoldersStatic;
     /**
+     * @private
      * @type {string}
      */
-    _buildPath: string;
+    private _buildPath;
     /**
+     * @private
      * @type {string}
      */
-    _buildAttrIdentifier: string;
+    private _buildAttrIdentifier;
     /**
+     * @private
      * @type {string}
      */
-    _buildPrefix: string;
+    private _buildPrefix;
     /**
+     * @private
      * @type {boolean}
      */
-    _disableIndent: boolean;
+    private _disableIndent;
     /**
+     * @private
      * @type {[string,string,string]}
      */
-    _separator: [string, string, string];
+    private _separator;
     /**
+     * @private
      * @type {resolverType}
      */
-    _renameAttribute: resolverType;
+    private _renameAttribute;
     /**
+     * @private
      * @type {Record<string,(clossingRules)>}
      */
-    _openingClosingTagsRules: Record<string, (clossingRules)>;
+    private _openingClosingTagsRules;
     /**
+     * @private
      * @type {Record<string,string>}
      */
-    _replacesFilenameWith: Record<string, string>;
+    private _replacesFilenameWith;
     /**
+     * @private
      * @type {filterType[]}
      */
-    _replaceStringWith: filterType[];
+    private _replaceStringWith;
     /**
+     * @private
      * @type {voidElementTagsType}
      */
-    _voidElementTags: voidElementTagsType;
+    private _voidElementTags;
     /**
+     * @private
      * @type {string}
      */
-    watchPath: string;
+    private watchPath;
     /**
+     * @private
      * @type {string}
      */
-    instuctionClassesPath: string;
+    private instuctionClassesPath;
     /**
+     * @private
+     */
+    private queueHandler;
+    /**
+     * @private
      * @readonly
      * @type {string}
      */
-    readonly basePath: string;
+    private readonly basePath;
     /**
+     * @private
      * @returns {resolverType}
      */
-    renameAttribute: () => resolverType;
+    private renameAttribute;
     /**
      * @returns {string}
      */
@@ -246,30 +275,34 @@ export class HTMLScrambler {
      */
     voidElementTags: () => voidElementTagsType;
     /**
+     * @private
      * @returns {filterType[]|[]}
      */
-    indentFilter: () => filterType[] | [];
+    private indentFilter;
     /**
      * @returns {filterType[]}
      */
     filter: () => filterType[];
     /**
+     * @private
      * @returns {Record<string,(clossingRules)>}
      */
-    openingClosingTagsRules: () => Record<string, (clossingRules)>;
+    private openingClosingTagsRules;
     /**
      * @param {number} index
      */
     instruction: (index: number) => string;
     /**
+     * @private
      * @type {string[]}
      */
-    extentions: string[];
+    private extentions;
     /**
+     * @private
      * @readonly
      * @type {string}
      */
-    readonly contentRegex: string;
+    private readonly contentRegex;
     /**
      * @param {string} filePath
      * @returns {clossingRules}
@@ -281,10 +314,11 @@ export class HTMLScrambler {
      */
     private readonly colors;
     /**
+     * @private
      * @param {string} text
      * @returns {string}
      */
-    colorize: (text: string) => string;
+    private colorize;
     /**
      * @typedef {{path:string,callback:()=>Promise<void>}} pathCallbackType
      */
@@ -301,6 +335,13 @@ export class HTMLScrambler {
      * @param {string} target
      */
     private copyFile;
+    /**
+     * @private
+     * @param {string} path_
+     * @param {boolean} isChange
+     * @param {...pathCallbackType} pathCallback
+     */
+    private handlePathQueued;
     /**
      * @private
      * @param {string} path_

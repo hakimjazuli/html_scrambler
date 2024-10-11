@@ -49,6 +49,7 @@ import { _Queue, _QueueObject } from '@html_first/simple_queue';
  */
 export class HTMLScrambler {
 	/**
+	 * @public
 	 * @type {HTMLScrambler}
 	 */
 	static __;
@@ -121,6 +122,9 @@ export class HTMLScrambler {
 		this.watchPath = pathJoin(this.basePath, _htmlWatchPath);
 		this.instuctionClassesPath = pathJoin(this.basePath, _builderClassInstanceFolderPath);
 	}
+	/**
+	 * @private
+	 */
 	queueHandler = new _Queue();
 	/**
 	 * @type {Document}
@@ -135,71 +139,88 @@ export class HTMLScrambler {
 	 */
 	static index;
 	/**
+	 * @private
 	 * @type {Record<string, import('./Builder.mjs').Builder>}
 	 */
 	static instances = {};
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_htmlWatchPath;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_builderClassInstanceFolderPath;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_publicSubfoldersStatic;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_publicRootStatic;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_buildPath;
 	/**
+	 * @private
 	 * @type {boolean}
 	 */
 	_disableIndent;
 	/**
+	 * @private
 	 * @type {resolverType}
 	 */
 	_renameAttribute;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_buildAttrIdentifier;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	_buildPrefix;
 	/**
+	 * @private
 	 * @type {[string,string,string]}
 	 */
 	_separator;
 	/**
+	 * @private
 	 * @type {Record<string,(clossingRules)>}
 	 */
 	_openingClosingTagsRules;
 	/**
+	 * @private
 	 * @type {voidElementTagsType}
 	 */
 	_voidElementTags;
 	/**
+	 * @private
 	 * @type {filterType[]}
 	 */
 	_replaceStringWith;
 	/**
+	 * @private
 	 * @type {Record<string,string>}
 	 */
 	_replacesFilenameWith;
 	/**
+	 * @private
 	 * @readonly
 	 * @type {string}
 	 */
 	basePath = process.cwd();
 	/**
+	 * @private
 	 * @returns {resolverType}
 	 */
 	renameAttribute = () => {
@@ -236,6 +257,7 @@ export class HTMLScrambler {
 		].concat(this._voidElementTags);
 	};
 	/**
+	 * @private
 	 * @returns {filterType[]|[]}
 	 */
 	indentFilter = () => {
@@ -266,6 +288,7 @@ export class HTMLScrambler {
 		];
 	};
 	/**
+	 * @private
 	 * @returns {Record<string,(clossingRules)>}
 	 */
 	openingClosingTagsRules = () => {
@@ -281,6 +304,7 @@ export class HTMLScrambler {
 	 */
 	instruction = (index) => `${this._buildPrefix}${index}`;
 	/**
+	 * @private
 	 * @type {string[]}
 	 */
 	extentions = [
@@ -289,6 +313,7 @@ export class HTMLScrambler {
 		// 'ts' /** temporary drop js and ts support */,
 	];
 	/**
+	 * @private
 	 * @readonly
 	 * @type {string}
 	 */
@@ -314,6 +339,7 @@ export class HTMLScrambler {
 		warning: '\x1b[32m',
 	};
 	/**
+	 * @private
 	 * @param {string} text
 	 * @returns {string}
 	 */
@@ -321,10 +347,12 @@ export class HTMLScrambler {
 		return `${this.colors.warning}${text}${this.colors.reset}`;
 	};
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	watchPath;
 	/**
+	 * @private
 	 * @type {string}
 	 */
 	instuctionClassesPath;
@@ -438,6 +466,7 @@ export class HTMLScrambler {
 		}
 	};
 	/**
+	 * @private
 	 * @param {string} watchPath
 	 * @returns {Promise<void>}
 	 */
@@ -457,7 +486,7 @@ export class HTMLScrambler {
 		return;
 	};
 	/**
-	 * @public
+	 * @private
 	 * @param {string} htmlPath
 	 * @returns {Promise<void>}
 	 */
@@ -482,6 +511,7 @@ export class HTMLScrambler {
 	};
 	/**
 	 * split with escapeString `/`
+	 * @public
 	 * @param {string} string
 	 * @param {string} delimiter
 	 */
@@ -560,6 +590,7 @@ export class HTMLScrambler {
 		}
 	};
 	/**
+	 * @private
 	 * @param {string} fullPathNoExt
 	 * @param {string} ext
 	 */
@@ -608,6 +639,7 @@ export class HTMLScrambler {
 		});
 	};
 	/**
+	 * @private
 	 * @param {HTMLElement|Element} element
 	 * @param {string} newAttributeName
 	 * @param {string} attribute
@@ -640,6 +672,7 @@ export class HTMLScrambler {
 		}
 	};
 	/**
+	 * @public
 	 * @param {string} filePath
 	 * @param {()=>Promise<boolean>} asyncCallback
 	 * return boolan whether to use only innerHTML (or outerHTML)
