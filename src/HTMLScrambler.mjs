@@ -7,6 +7,7 @@ import chokidar from 'chokidar';
 import path from 'path';
 import domino from 'domino';
 import { stringHelpers } from './stringHelpers.mjs';
+import { _Queue, _QueueObject } from '@html_first/simple_queue';
 
 /**
  * @typedef {[openTag:string,closeTag:string]} clossingRules
@@ -27,7 +28,7 @@ import { stringHelpers } from './stringHelpers.mjs';
  * // @ts-check
  * import { HTMLScrambler } from '@html_first/html_scrambler'
  *
- * new HTMLScrambler({...options});
+ * new HTMLScrambler({...options}).run(...pathCallbacks);
  * ```
  * - initiate watcher by adding script to your `package.json` scripts object
  * ```json
@@ -119,8 +120,8 @@ export class HTMLScrambler {
 		this._voidElementTags = _voidElementTags;
 		this.watchPath = pathJoin(this.basePath, _htmlWatchPath);
 		this.instuctionClassesPath = pathJoin(this.basePath, _builderClassInstanceFolderPath);
-		this.run();
 	}
+	queueHandler = new _Queue();
 	/**
 	 * @type {Document}
 	 */
@@ -271,6 +272,7 @@ export class HTMLScrambler {
 		return Object.assign(this._openingClosingTagsRules, {
 			jsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
 			tsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
+			templ: ['// b-build: start/n', '// b-build: end/n'],
 			default: ['<!-- b-build: start -->', '<!-- b-build: end -->'],
 		});
 	};
@@ -327,19 +329,18 @@ export class HTMLScrambler {
 	 */
 	instuctionClassesPath;
 	/**
-	 * @typedef {{path:string,callback:()=>Promise<void>}[]} path_callback_type
+	 * @typedef {{path:string,callback:()=>Promise<void>}} pathCallbackType
 	 */
 	/**
-	 * @private
-	 * @param {path_callback_type} [path_callback]
+	 * @param {...pathCallbackType} [pathCallback]
 	 */
-	run = (path_callback = undefined) => {
+	run = (...pathCallback) => {
 		const paths = [this.watchPath, this.instuctionClassesPath];
-		if (path_callback) {
-			for (let i = 0; i < path_callback.length; i++) {
-				const { path: path_, callback } = path_callback[i];
+		if (pathCallback) {
+			for (let i = 0; i < pathCallback.length; i++) {
+				const { path: path_, callback } = pathCallback[i];
 				const path__ = pathJoin(this.basePath, path_);
-				path_callback[i] = { path: path__, callback };
+				pathCallback[i] = { path: path__, callback };
 				paths.push(path__);
 			}
 		}
@@ -349,10 +350,10 @@ export class HTMLScrambler {
 		});
 		watcher
 			.on('add', async (path) => {
-				this.handlePath(path, false, path_callback);
+				this.handlePathQueued(path, false, ...pathCallback);
 			})
 			.on('change', async (path) => {
-				this.handlePath(path, true, path_callback);
+				this.handlePathQueued(path, true, ...pathCallback);
 			});
 		process.on('exit', (code) => {
 			console.log('Exiting...');
@@ -380,10 +381,26 @@ export class HTMLScrambler {
 	 * @private
 	 * @param {string} path_
 	 * @param {boolean} isChange
-	 * @param {path_callback_type} [pathCallback]
+	 * @param {...pathCallbackType} pathCallback
 	 */
-	handlePath = async (path_, isChange, pathCallback = undefined) => {
-		const watchPath = this.watchPath;
+	handlePathQueued = (path_, isChange, ...pathCallback) => {
+		this.queueHandler.assign(
+			new _QueueObject(
+				path_,
+				async () => {
+					await this.handlePath(path_, isChange, ...pathCallback);
+				},
+				300
+			)
+		);
+	};
+	/**
+	 * @private
+	 * @param {string} path_
+	 * @param {boolean} isChange
+	 * @param {...pathCallbackType} pathCallback
+	 */
+	handlePath = async (path_, isChange, ...pathCallback) => {
 		if (pathCallback) {
 			for (let i = 0; i < pathCallback.length; i++) {
 				const { path: path__, callback } = pathCallback[i];
@@ -394,21 +411,23 @@ export class HTMLScrambler {
 				}
 			}
 		}
+		const watchPath = this.watchPath;
 		if (!path_.startsWith(watchPath)) {
 			if (isChange) {
+				HTMLScrambler.instances = {};
 				await HTMLScrambler.handleHtmlAll(watchPath);
 				console.info(`render build for ${this.colorize('ALL OF')} "${watchPath}/*.html"`);
 				return;
 			}
 		} else if (!path_.endsWith('.html')) {
-			const in_a_folder = path_.replace(`${watchPath}\\`, '').includes('\\');
-			let send_to = '';
-			if (in_a_folder) {
-				send_to = pathJoin(this.basePath, this._publicSubfoldersStatic);
+			const inAFolder = path_.replace(`${watchPath}\\`, '').includes('\\');
+			let sendTo = '';
+			if (inAFolder) {
+				sendTo = pathJoin(this.basePath, this._publicSubfoldersStatic);
 			} else {
-				send_to = pathJoin(this.basePath, this._publicRootStatic);
+				sendTo = pathJoin(this.basePath, this._publicRootStatic);
 			}
-			this.copyFile(path_, path_.replace(watchPath, send_to));
+			this.copyFile(path_, path_.replace(watchPath, sendTo));
 			return;
 		} else {
 			await HTMLScrambler.handleHtml(path_);

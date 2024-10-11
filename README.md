@@ -39,7 +39,7 @@ node ./node_modules/@html_first/html_scrambler/starter.mjs
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>
 
-- create a file with exported default by extending this class with static method instructions;```js// @ts-checkimport { Builder } from '@html_first/html_scrambler'export default class extends Builder{	// args': string[];	static someMethod = (...args) => {		// code	}}```
+- create a file with exported default by extending this class with static method instructions;```js// on `${_builderClassInstanceFolderPath}/someClass.mjs`// @ts-checkimport { Builder } from '@html_first/html_scrambler'export default class extends Builder{	// args': string[];	static someMethod = (...args) => {		// code	}}```- usage on `*.html` file:```html<div build b-1="someClass;someMethod;arg0;arg1" b-2="otherClass;otherMethod;...args">	divInnerHTML</div>```> - notice that `b-${index}` are incrementaly increases, the lib expect `[build]` to have b-1 and increases incrementaly by `1`, if the element has no `b-${next}` it will ignore any `b-`'s afterward;> - this `attributeNameIdentification` can be changed using [`HTMLScrambler`](#htmlscrambler) `options._buildAttrIdentifier` and `options._buildPrefix` respectively on that order;> > - preferably use dash "`-`" as word separator;> > - don't use colon "`:`" as word separator;- check on copyed `/builder/html_first/classes/` for examples on how to use;
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>
 
@@ -48,6 +48,6 @@ node ./node_modules/@html_first/html_scrambler/starter.mjs
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>
 
-- assign folder watcher by instantiating this class;```js// @ts-checkimport { HTMLScrambler } from '@html_first/html_scrambler'new HTMLScrambler({...options});```- initiate watcher by adding script to your `package.json` scripts object```json{..."scripts":{	...	"scrambler":"node ./path/to/thisInstance/file.mjs",	...}...}```- then```shellnpm run scrambler```
+- assign folder watcher by instantiating this class;```js// @ts-checkimport { HTMLScrambler } from '@html_first/html_scrambler'new HTMLScrambler({...options}).run(...pathCallbacks);```- initiate watcher by adding script to your `package.json` scripts object```json{..."scripts":{	...	"scrambler":"node ./path/to/thisInstance/file.mjs",	...}...}```- then```shellnpm run scrambler```
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>

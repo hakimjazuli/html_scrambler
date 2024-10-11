@@ -2,6 +2,7 @@
  * @description
  * - create a file with exported default by extending this class with static method instructions;
  * ```js
+ * // on `${_builderClassInstanceFolderPath}/someClass.mjs`
  * // @ts-check
  * import { Builder } from '@html_first/html_scrambler'
  * export default class extends Builder{
@@ -11,6 +12,17 @@
  * 	}
  * }
  * ```
+ * - usage on `*.html` file:
+ * ```html
+ * <div build b-1="someClass;someMethod;arg0;arg1" b-2="otherClass;otherMethod;...args">
+ * 	divInnerHTML
+ * </div>
+ * ```
+ * > - notice that `b-${index}` are incrementaly increases, the lib expect `[build]` to have b-1 and increases incrementaly by `1`, if the element has no `b-${next}` it will ignore any `b-`'s afterward;
+ * > - this `attributeNameIdentification` can be changed using [`HTMLScrambler`](#htmlscrambler) `options._buildAttrIdentifier` and `options._buildPrefix` respectively on that order;
+ * > > - preferably use dash "`-`" as word separator;
+ * > > - don't use colon "`:`" as word separator;
+ * - check on copyed `/builder/html_first/classes/` for examples on how to use;
  */
 export class Builder {
     /**

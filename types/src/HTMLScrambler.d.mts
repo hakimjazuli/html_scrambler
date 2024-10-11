@@ -17,7 +17,7 @@
  * // @ts-check
  * import { HTMLScrambler } from '@html_first/html_scrambler'
  *
- * new HTMLScrambler({...options});
+ * new HTMLScrambler({...options}).run(...pathCallbacks);
  * ```
  * - initiate watcher by adding script to your `package.json` scripts object
  * ```json
@@ -286,13 +286,15 @@ export class HTMLScrambler {
      */
     colorize: (text: string) => string;
     /**
-     * @typedef {{path:string,callback:()=>Promise<void>}[]} path_callback_type
+     * @typedef {{path:string,callback:()=>Promise<void>}} pathCallbackType
      */
     /**
-     * @private
-     * @param {path_callback_type} [path_callback]
+     * @param {...pathCallbackType} [pathCallback]
      */
-    private run;
+    run: (...pathCallback?: {
+        path: string;
+        callback: () => Promise<void>;
+    }[]) => void;
     /**
      * @private
      * @param {string} source
@@ -303,7 +305,7 @@ export class HTMLScrambler {
      * @private
      * @param {string} path_
      * @param {boolean} isChange
-     * @param {path_callback_type} [pathCallback]
+     * @param {...pathCallbackType} pathCallback
      */
     private handlePath;
 }
