@@ -48,6 +48,6 @@ node ./node_modules/@html_first/html_scrambler/starter.mjs
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>
 
-- assign folder watcher by instantiating this class;```js// @ts-checkimport { HTMLScrambler } from '@html_first/html_scrambler'new HTMLScrambler({...options}).run(...pathCallbacks);```- initiate watcher by adding script to your `package.json` scripts object```json{..."scripts":{	...	"scrambler":"node ./path/to/thisInstance/file.mjs",	...}...}```- then```shellnpm run scrambler```
+- assign folder watcher by instantiating this class;```js// @ts-checkimport { HTMLScrambler } from '@html_first/html_scrambler'new HTMLScrambler({...options}).run(...pathCallbacks);```- initiate watcher by adding script to your `package.json` scripts object```json{..."scripts":{	...	"scrambler":"node --watch ./path/to/thisInstance/file.mjs",	// or	"scrambler":"bun --watch ./path/to/thisInstance/file.mjs",	// or	"scrambler":"bun --hot ./path/to/thisInstance/file.mjs",	...}...}```- then```shellnpm run scrambler```
 
 *) <sub>[go to exported list](#exported-api-and-type-list)</sub>

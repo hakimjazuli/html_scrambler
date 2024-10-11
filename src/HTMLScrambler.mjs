@@ -35,7 +35,11 @@ import { _Queue, _QueueObject } from '@html_first/simple_queue';
  * {...
  * "scripts":{
  * 	...
- * 	"scrambler":"node ./path/to/thisInstance/file.mjs",
+ * 	"scrambler":"node --watch ./path/to/thisInstance/file.mjs",
+ * 	// or
+ * 	"scrambler":"bun --watch ./path/to/thisInstance/file.mjs",
+ * 	// or
+ * 	"scrambler":"bun --hot ./path/to/thisInstance/file.mjs",
  * 	...
  * }
  * ...
@@ -390,7 +394,7 @@ export class HTMLScrambler {
 		});
 		process.on('SIGINT', () => {
 			console.info({ message: `Received ${this.colorize('SIGINT')}. Exiting...` });
-			process.exit(0);
+			process.exit();
 		});
 		console.info(
 			`\nstarts watching: ${this.colorize('${this.basePath}')}\n`,
