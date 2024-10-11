@@ -9,7 +9,11 @@ export default class extends Builder {
 	 * - true;
 	 */
 	static foreach = async (foreachArgument, surroundInner = false) => {
-		Builder.surroundWith(`<?php foreach(${foreachArgument}){?>`, '<?php };?>', surroundInner);
+		Builder.surroundWith(
+			`\n<?php foreach(${foreachArgument}){?>\n`,
+			'\n<?php };?>\n',
+			surroundInner
+		);
 	};
 	/**
 	 * @param {string} ifArgument
@@ -18,6 +22,6 @@ export default class extends Builder {
 	 * - true;
 	 */
 	static if = async (ifArgument, surroundInner = false) => {
-		Builder.surroundWith(`<?php if(${ifArgument}){?>`, '<?php };?>\n', surroundInner);
+		Builder.surroundWith(`\n<?php if(${ifArgument}){?>\n`, '\n<?php };?>\n', surroundInner);
 	};
 }

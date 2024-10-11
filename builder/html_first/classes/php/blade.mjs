@@ -8,7 +8,7 @@ export default class extends Builder {
 	 */
 	static include = (new_dir, data = '[]') => {
 		new_dir = `${new_dir}.blade.php`;
-		const replace = `@include(${new_dir.toLowerCase().replace(/\\|\//g, '.')}, ${data});`;
+		const replace = `\n@include(${new_dir.toLowerCase().replace(/\\|\//g, '.')}, ${data});\n`;
 		Builder.partial(new_dir, replace);
 	};
 }
