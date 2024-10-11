@@ -356,14 +356,17 @@ export class HTMLScrambler {
 				this.handlePathQueued(path, true, ...pathCallback);
 			});
 		process.on('exit', (code) => {
-			console.log('Exiting...');
+			console.info({ message: 'Exiting...', code: this.colorize(code.toString()) });
 			watcher.close();
 		});
 		process.on('SIGINT', () => {
-			console.log('Received SIGINT. Exiting...');
+			console.info({ message: `Received ${this.colorize('SIGINT')}. Exiting...` });
 			process.exit(0);
 		});
-		console.info(`\nstarts watching: "${this.basePath}"\n`, 'Press Ctrl+C to exit.');
+		console.info(
+			`\nstarts watching: ${this.colorize('${this.basePath}')}\n`,
+			'Press Ctrl+C to exit.'
+		);
 	};
 	/**
 	 * @private
