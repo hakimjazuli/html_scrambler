@@ -7,4 +7,9 @@ new HTMLScrambler({
 	_buildPath: '/mockFolderBackEnd/',
 	_publicRootStatic: '/public/',
 	_publicSubfoldersStatic: '/mockFolderBackEnd/index/',
-});
+})
+	.run
+	/**
+	 * pathCallbacks
+	 */
+	();
