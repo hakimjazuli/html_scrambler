@@ -582,11 +582,12 @@ export class HTMLScrambler {
 		if (!fullPath) {
 			return;
 		}
+		const chacheBuster = `?t=${Date.now()}`;
 		try {
-			const { default: ClassObject } = await import(`file://${fullPath}`);
+			const { default: ClassObject } = await import(`file://${fullPath}${chacheBuster}`);
 			this.instances[className] = new ClassObject();
 		} catch (error) {
-			const { default: ClassObject } = await import(fullPath);
+			const { default: ClassObject } = await import(`${fullPath}${chacheBuster}`);
 			this.instances[className] = new ClassObject();
 		}
 	};
