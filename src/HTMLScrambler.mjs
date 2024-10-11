@@ -607,16 +607,18 @@ export class HTMLScrambler {
 			const replaceWith = HTMLScrambler.__._replacesFilenameWith[originalFileName];
 			filePath = filePath.replace(originalFileName, replaceWith);
 		}
-		const [exportStart, exportEnd] = HTMLScrambler.__.exportIdentifier(filePath);
+		let [exportStart, exportEnd] = HTMLScrambler.__.exportIdentifier(filePath);
+		exportStart = `${exportStart}\n`;
+		exportEnd = `\n${exportEnd}`;
 		content = stringHelpers.closeVoidElement(content);
 		fs.stat(filePath, (err, stats) => {
 			if (err) {
 				fs.mkdirSync(dirPath, { recursive: true });
 				fs.writeFileSync(
 					filePath,
-					`${exportStart}\n${stringHelpers.interpretSpecialChars(
+					`${exportStart}${stringHelpers.interpretSpecialChars(
 						stringHelpers.uncommentDocument(content)
-					)}\n${exportEnd}`,
+					)}${exportEnd}`,
 					'utf8'
 				);
 				return;
