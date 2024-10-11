@@ -299,7 +299,7 @@ export class HTMLScrambler {
 		return Object.assign(this._openingClosingTagsRules, {
 			jsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
 			tsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
-			templ: ['// b-build: start', '// b-build: end'],
+			templ: ['/* b-build: start */', '/* b-build: end */'],
 			default: ['<!-- b-build: start -->', '<!-- b-build: end -->'],
 		});
 	};
