@@ -364,7 +364,7 @@ export class HTMLScrambler {
 	 * @param {...pathCallbackType} [pathCallback]
 	 */
 	run = (...pathCallback) => {
-		const paths = [this.watchPath, this.instuctionClassesPath];
+		const paths = [this.watchPath];
 		if (pathCallback) {
 			for (let i = 0; i < pathCallback.length; i++) {
 				const { path: path_, callback } = pathCallback[i];
@@ -444,14 +444,7 @@ export class HTMLScrambler {
 			}
 		}
 		const watchPath = this.watchPath;
-		if (!path_.startsWith(watchPath)) {
-			if (isChange) {
-				HTMLScrambler.instances = {};
-				await HTMLScrambler.handleHtmlAll(watchPath);
-				console.info(`render build for ${this.colorize('ALL OF')} "${watchPath}/*.html"`);
-				return;
-			}
-		} else if (!path_.endsWith('.html')) {
+		if (path_.startsWith(watchPath) && !path_.endsWith('.html')) {
 			const inAFolder = path_.replace(`${watchPath}\\`, '').includes('\\');
 			let sendTo = '';
 			if (inAFolder) {
@@ -548,7 +541,7 @@ export class HTMLScrambler {
 				}
 				await elementHandler.constructor[method_](...args);
 			} catch (error) {
-				console.log({
+				console.error({
 					error,
 					instruction: {
 						class: class_,
@@ -582,12 +575,11 @@ export class HTMLScrambler {
 		if (!fullPath) {
 			return;
 		}
-		const chacheBuster = `?t=${Date.now()}`;
 		try {
-			const { default: ClassObject } = await import(`file://${fullPath}${chacheBuster}`);
+			const { default: ClassObject } = await import(`file://${fullPath}`);
 			this.instances[className] = new ClassObject();
 		} catch (error) {
-			const { default: ClassObject } = await import(`${fullPath}${chacheBuster}`);
+			const { default: ClassObject } = await import(`${fullPath}`);
 			this.instances[className] = new ClassObject();
 		}
 	};
