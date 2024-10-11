@@ -295,7 +295,7 @@ export class HTMLScrambler {
 		return Object.assign(this._openingClosingTagsRules, {
 			jsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
 			tsx: ['{/* b-build: start */}', '{/* b-build: end */}'],
-			templ: ['// b-build: start/n', '// b-build: end/n'],
+			templ: ['// b-build: start', '// b-build: end'],
 			default: ['<!-- b-build: start -->', '<!-- b-build: end -->'],
 		});
 	};
@@ -324,11 +324,12 @@ export class HTMLScrambler {
 	 */
 	exportIdentifier = (filePath) => {
 		const closingTags = this.openingClosingTagsRules();
-		if (filePath in closingTags) {
-			return closingTags[filePath];
-		} else {
-			return closingTags.default;
+		const pathDest = filePath.split('.');
+		const ext = pathDest[pathDest.length - 1];
+		if (ext in closingTags) {
+			return closingTags[ext];
 		}
+		return closingTags.default;
 	};
 	/**
 	 * @private
@@ -542,10 +543,10 @@ export class HTMLScrambler {
 					await this.loadBuilderClass(class_);
 				}
 				const elementHandler = this.instances[class_];
-				if (!(method_ in elementHandler)) {
+				if (!(method_ in elementHandler.constructor)) {
 					throw Error(`method "${method_}" doesn't exist in class "${class_}"`);
 				}
-				await elementHandler[method_](...args);
+				await elementHandler.constructor[method_](...args);
 			} catch (error) {
 				console.log({
 					error,
@@ -613,9 +614,9 @@ export class HTMLScrambler {
 				fs.mkdirSync(dirPath, { recursive: true });
 				fs.writeFileSync(
 					filePath,
-					`${exportStart} ${stringHelpers.interpretSpecialChars(
+					`${exportStart}\n${stringHelpers.interpretSpecialChars(
 						stringHelpers.uncommentDocument(content)
-					)} ${exportEnd}`,
+					)}\n${exportEnd}`,
 					'utf8'
 				);
 				return;
