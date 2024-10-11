@@ -43,18 +43,6 @@ export class Builder {
 	}
 	static splitX = HTMLScrambler.splitX;
 	/**
-	 * @param {string} elementString
-	 * @param {boolean} [onlyInner]
-	 */
-	static replaceWith = (elementString, onlyInner = false) => {
-		if (onlyInner) {
-			HTMLScrambler.element.innerHTML = elementString;
-			return;
-		}
-		this.startWith(elementString, onlyInner);
-		HTMLScrambler.element.remove();
-	};
-	/**
 	 * @param {string} argumentOpen
 	 * @param {string} argumentClose
 	 * @param {false|string} [surroundInner]
@@ -150,20 +138,30 @@ export class Builder {
 		);
 	};
 	/**
-	 * @param {string} newDir
-	 * @param {false|string} replace
-	 * replace original element (in the parent file) with string
+	 * @param {string} elementString
+	 * @param {boolean} [onlyInner]
 	 */
-	static partial = (newDir, replace = false) => {
-		HTMLScrambler.saveTo(newDir, async () => {
-			if (replace !== false) {
-				this.replaceWith(`${replace}\n`);
-				return false;
-			}
-			return true;
+	static replaceWith = (elementString, onlyInner = false) => {
+		if (onlyInner) {
+			HTMLScrambler.element.innerHTML = elementString;
+			return;
+		}
+		this.startWith(elementString, onlyInner);
+		HTMLScrambler.element.remove();
+	};
+	/**
+	 * @param {Object} options
+	 * @param {string} options.newDir
+	 * @param {boolean} options.saveOnlyInner
+	 * @param {boolean} options.replaceOnlyInner
+	 * @param {false|string} [options.replace]
+	 */
+	static partial = async ({ newDir, replace = false, replaceOnlyInner, saveOnlyInner }) => {
+		await HTMLScrambler.saveTo(newDir, async () => {
+			return saveOnlyInner;
 		});
-		if (replace !== false) {
-			HTMLScrambler.element.innerHTML = replace;
+		if (replace) {
+			this.replaceWith(replace, replaceOnlyInner);
 		}
 	};
 	/**

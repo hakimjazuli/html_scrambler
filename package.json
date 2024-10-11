@@ -7,7 +7,8 @@
 	"types": "./types/index.d.mts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "concurrently \"bun ./dev/index.mjs\" \"bun tsc --watch\""
+		"dev": "concurrently \"bun ./dev/index.mjs\" \"bun tsc --watch\"",
+		"postpublish": "bun link @html_first/html_scrambler"
 	},
 	"repository": {
 		"type": "git",

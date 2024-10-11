@@ -35,11 +35,6 @@ export class Builder {
     static get element(): Element | HTMLElement;
     static splitX: (string: string, delimiter: string) => string[];
     /**
-     * @param {string} elementString
-     * @param {boolean} [onlyInner]
-     */
-    static replaceWith: (elementString: string, onlyInner?: boolean) => void;
-    /**
      * @param {string} argumentOpen
      * @param {string} argumentClose
      * @param {false|string} [surroundInner]
@@ -70,11 +65,23 @@ export class Builder {
      */
     static customAttr: (attribute: string) => Promise<void>;
     /**
-     * @param {string} newDir
-     * @param {false|string} replace
-     * replace original element (in the parent file) with string
+     * @param {string} elementString
+     * @param {boolean} [onlyInner]
      */
-    static partial: (newDir: string, replace?: false | string) => void;
+    static replaceWith: (elementString: string, onlyInner?: boolean) => void;
+    /**
+     * @param {Object} options
+     * @param {string} options.newDir
+     * @param {boolean} options.saveOnlyInner
+     * @param {boolean} options.replaceOnlyInner
+     * @param {false|string} [options.replace]
+     */
+    static partial: ({ newDir, replace, replaceOnlyInner, saveOnlyInner }: {
+        newDir: string;
+        saveOnlyInner: boolean;
+        replaceOnlyInner: boolean;
+        replace?: false | string;
+    }) => Promise<void>;
     /**
      * @private
      * @param {number} index
