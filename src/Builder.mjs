@@ -160,7 +160,7 @@ export class Builder {
 		await HTMLScrambler.saveTo(newDir, async () => {
 			return saveOnlyInner;
 		});
-		if (replace) {
+		if (replace !== false) {
 			this.replaceWith(replace, replaceOnlyInner);
 		}
 	};

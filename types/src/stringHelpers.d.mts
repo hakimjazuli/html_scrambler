@@ -1,9 +1,9 @@
 export class stringHelpers {
     /**
-     * @param {string} doc_string
+     * @param {string} docString
      * @returns {string}
      */
-    static uncommentDocument: (doc_string: string) => string;
+    static uncommentDocument: (docString: string) => string;
     /**
      * @param {string} str
      */
@@ -24,11 +24,11 @@ export class stringHelpers {
      */
     static interpretSpecialChars: (string: string) => string;
     /**
-     * @param {string} string_check
+     * @param {string} stringCheck
      * @param {string[]} includes
      * @returns {boolean}
      */
-    static likes: (string_check: string, ...includes: string[]) => boolean;
+    static likes: (stringCheck: string, ...includes: string[]) => boolean;
     /**
      * @param {string} content
      */
@@ -36,8 +36,8 @@ export class stringHelpers {
     /**
      * Replace substrings or patterns in a string with other strings.
      * @param {String} string - The input string to perform replacements on.
-     * @param {Array<[String|RegExp, String]>} searchs_replaces - An array of search strings (or regexp) and their corresponding replacement strings.
+     * @param {Array<[String|RegExp, String]>} searchsReplaces - An array of search strings (or regexp) and their corresponding replacement strings.
      * @returns {String} - The modified string after replacements.
      */
-    static stringReplaces: (string: string, searchs_replaces: Array<[string | RegExp, string]>) => string;
+    static stringReplaces: (string: string, searchsReplaces: Array<[string | RegExp, string]>) => string;
 }

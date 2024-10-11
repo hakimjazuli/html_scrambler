@@ -4,11 +4,11 @@ import { HTMLScrambler } from './HTMLScrambler.mjs';
 
 export class stringHelpers {
 	/**
-	 * @param {string} doc_string
+	 * @param {string} docString
 	 * @returns {string}
 	 */
-	static uncommentDocument = (doc_string) => {
-		return doc_string.replace(
+	static uncommentDocument = (docString) => {
+		return docString.replace(
 			new RegExp(`${HTMLScrambler.__.uncommentIdentifier()}="([^"]+)"`, 'g'),
 			'$1'
 		);
@@ -41,13 +41,13 @@ export class stringHelpers {
 		return stringHelpers.stringReplaces(string, HTMLScrambler.__.filter());
 	};
 	/**
-	 * @param {string} string_check
+	 * @param {string} stringCheck
 	 * @param {string[]} includes
 	 * @returns {boolean}
 	 */
-	static likes = (string_check, ...includes) => {
+	static likes = (stringCheck, ...includes) => {
 		for (let i = 0; i < includes.length; i++) {
-			if (string_check.includes(includes[i])) {
+			if (stringCheck.includes(includes[i])) {
 				return true;
 			}
 		}
@@ -57,19 +57,19 @@ export class stringHelpers {
 	 * @param {string} content
 	 */
 	static closeVoidElement = (content) => {
-		const void_tags = HTMLScrambler.__.voidElementTags();
-		const void_elem_regex = new RegExp(`<(${void_tags.join('|')})([^>]*)>`, 'gim');
-		return content.replace(void_elem_regex, '<$1$2 />');
+		const voidTags = HTMLScrambler.__.voidElementTags();
+		const voidElemRegex = new RegExp(`<(${voidTags.join('|')})([^>]*)>`, 'gim');
+		return content.replace(voidElemRegex, '<$1$2 />');
 	};
 	/**
 	 * Replace substrings or patterns in a string with other strings.
 	 * @param {String} string - The input string to perform replacements on.
-	 * @param {Array<[String|RegExp, String]>} searchs_replaces - An array of search strings (or regexp) and their corresponding replacement strings.
+	 * @param {Array<[String|RegExp, String]>} searchsReplaces - An array of search strings (or regexp) and their corresponding replacement strings.
 	 * @returns {String} - The modified string after replacements.
 	 */
-	static stringReplaces = (string, searchs_replaces) => {
-		for (let i = 0; i < searchs_replaces.length; i++) {
-			const [search, replace] = searchs_replaces[i];
+	static stringReplaces = (string, searchsReplaces) => {
+		for (let i = 0; i < searchsReplaces.length; i++) {
+			const [search, replace] = searchsReplaces[i];
 			string = string.replace(search, replace);
 		}
 		return string;

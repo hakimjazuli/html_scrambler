@@ -609,9 +609,9 @@ export class HTMLScrambler {
 				fs.mkdirSync(dirPath, { recursive: true });
 				fs.writeFileSync(
 					filePath,
-					`${exportStart}\n${stringHelpers.interpretSpecialChars(
-						stringHelpers.uncommentDocument(content)
-					)}\n${exportEnd}`,
+					stringHelpers.interpretSpecialChars(
+						`${exportStart}\n${stringHelpers.uncommentDocument(content)}\n${exportEnd}`
+					),
 					'utf8'
 				);
 				return;
@@ -626,9 +626,9 @@ export class HTMLScrambler {
 				);
 				const newContent = oldContent.replace(
 					regex,
-					`${exportStart}\n${stringHelpers.interpretSpecialChars(
-						stringHelpers.uncommentDocument(content)
-					)}\n${exportEnd}`
+					stringHelpers.interpretSpecialChars(
+						`${exportStart}\n${stringHelpers.uncommentDocument(content)}\n${exportEnd}`
+					)
 				);
 				fs.writeFileSync(filePath, newContent, 'utf8');
 			}
