@@ -377,13 +377,13 @@ export class HTMLScrambler {
 			ignored: /[\/\\]\./,
 			persistent: true,
 		});
-		watcher
-			.on('add', async (path) => {
-				this.handlePathQueued(path, false, ...pathCallback);
-			})
-			.on('change', async (path) => {
-				this.handlePathQueued(path, true, ...pathCallback);
-			});
+		/**
+		 * @param {string} path
+		 */
+		const toQueue = async (path) => {
+			this.handlePathQueued(path, ...pathCallback);
+		};
+		watcher.on('add', toQueue).on('change', toQueue);
 		process.on('exit', (code) => {
 			console.info({ message: 'Exiting...', code: this.colorize(code.toString()) });
 			watcher.close();
@@ -412,15 +412,14 @@ export class HTMLScrambler {
 	/**
 	 * @private
 	 * @param {string} path_
-	 * @param {boolean} isChange
 	 * @param {...pathCallbackType} pathCallback
 	 */
-	handlePathQueued = (path_, isChange, ...pathCallback) => {
+	handlePathQueued = (path_, ...pathCallback) => {
 		this.queueHandler.assign(
 			new _QueueObject(
 				path_,
 				async () => {
-					await this.handlePath(path_, isChange, ...pathCallback);
+					await this.handlePath(path_, ...pathCallback);
 				},
 				300
 			)
@@ -429,10 +428,9 @@ export class HTMLScrambler {
 	/**
 	 * @private
 	 * @param {string} path_
-	 * @param {boolean} isChange
 	 * @param {...pathCallbackType} pathCallback
 	 */
-	handlePath = async (path_, isChange, ...pathCallback) => {
+	handlePath = async (path_, ...pathCallback) => {
 		if (pathCallback) {
 			for (let i = 0; i < pathCallback.length; i++) {
 				const { path: path__, callback } = pathCallback[i];

@@ -338,14 +338,12 @@ export class HTMLScrambler {
     /**
      * @private
      * @param {string} path_
-     * @param {boolean} isChange
      * @param {...pathCallbackType} pathCallback
      */
     private handlePathQueued;
     /**
      * @private
      * @param {string} path_
-     * @param {boolean} isChange
      * @param {...pathCallbackType} pathCallback
      */
     private handlePath;
