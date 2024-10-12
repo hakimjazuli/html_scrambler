@@ -48,4 +48,5 @@ export default class extends Builder {
 			}
 		}
 	};
+	static inner = this.replaceWithInner;
 }

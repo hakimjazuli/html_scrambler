@@ -87,6 +87,7 @@ export class Builder {
      * @param {number} index
      */
     private static getCurrentValidIndex;
+    static replaceWithInner: () => void;
     /**
      * @protected
      * @param {string[]} arguments_

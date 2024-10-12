@@ -175,6 +175,9 @@ export class Builder {
 		}
 		return index;
 	};
+	static replaceWithInner = () => {
+		this.element.outerHTML = this.element.innerHTML;
+	};
 	/**
 	 * @protected
 	 * @param {string[]} arguments_
